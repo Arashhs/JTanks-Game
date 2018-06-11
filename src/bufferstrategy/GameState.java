@@ -1,6 +1,7 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -25,6 +26,8 @@ public class GameState {
 	private int mouseX, mouseY;	
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
+	private Point targetPoint;
+	private double degree;
 	
 	public GameState() {
 		locX = 100;
@@ -50,8 +53,9 @@ public class GameState {
 	 */
 	public void update() {
 		if (mousePress) {
-			locY = mouseY - diam / 2;
-			locX = mouseX - diam / 2;
+/*			locY = mouseY - diam / 2;
+			locX = mouseX - diam / 2; */
+
 		}
 		if (keyUP)
 			locY -= 8;
@@ -151,6 +155,24 @@ public class GameState {
 			mouseX = e.getX();
 			mouseY = e.getY();
 		}
-	}
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
+		    targetPoint = e.getPoint();
+        }
+    }
+
+    public Point getCenter(){
+	    Point point = new Point(locX + diam / 2 , locY + diam / 2);
+	    return point;
+    }
+
+    public Point getTargetPoint() {
+        return targetPoint;
+    }
+
+    public void setTargetPoint(Point targetPoint) {
+        this.targetPoint = targetPoint;
+    }
 }
 

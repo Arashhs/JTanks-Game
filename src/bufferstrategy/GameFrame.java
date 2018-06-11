@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,9 +32,10 @@ public class GameFrame extends JFrame {
 	public static final int GAME_HEIGHT = 720;                  // 720p game resolution
 	public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
 
-	private BufferedImage image;
+	private BufferedImage base;
+    private BufferedImage turret;
 
-	private long lastRender;
+    private long lastRender;
 	private ArrayList<Float> fpsHistory;
 
 	private BufferStrategy bufferStrategy;
@@ -45,7 +48,8 @@ public class GameFrame extends JFrame {
 		fpsHistory = new ArrayList<>(100);
 
 		try{
-			image = ImageIO.read(new File("Resources\\tank.png"));
+			base = ImageIO.read(new File("Resources\\tank.png"));
+			turret = ImageIO.read(new File("Resources\\tankGun01.png"));
 		}
 		catch(IOException e){
 			System.out.println(e);
@@ -105,8 +109,19 @@ public class GameFrame extends JFrame {
 		// Draw ball
 		g2d.setColor(Color.BLACK);
 		g2d.fillOval(state.locX, state.locY, state.diam, state.diam);
-
-		g2d.drawImage(image,state.locX,state.locY,null);
+		g2d.drawImage(base,state.locX,state.locY,null);
+		AffineTransform backupAt = g2d.getTransform();
+        AffineTransform at = new AffineTransform();
+        if (state.getTargetPoint() != null) {
+            g2d.draw(new Line2D.Double(state.getCenter().x + 33 , state.getCenter().y + 30 , state.getTargetPoint().x, state.getTargetPoint().y));
+            double deltaX = - ( state.getCenter().x + 33) + state.getTargetPoint().x ;
+            double deltaY = - ( state.getCenter().y + 30) + state.getTargetPoint().y;
+            double rotation = Math.atan2(deltaY, deltaX);
+            at.rotate(rotation, state.getCenter().x + 33 , state.getCenter().y + 30);
+        }
+        g2d.setTransform(at);
+		g2d.drawImage(turret, state.getCenter().x , state.getCenter().y , null);
+		g2d.setTransform(backupAt);
 
 
 
