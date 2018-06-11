@@ -1,6 +1,7 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -28,6 +29,7 @@ public class GameState {
 	private MouseHandler mouseHandler;
 	private Point targetPoint;
 	private double degree;
+	private boolean gunState;
 	
 	public GameState() {
 		locX = 100;
@@ -46,6 +48,7 @@ public class GameState {
 		//
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
+		gunState = true;
 	}
 	
 	/**
@@ -143,6 +146,8 @@ public class GameState {
 			mouseX = e.getX();
 			mouseY = e.getY();
 			mousePress = true;
+			if(SwingUtilities.isRightMouseButton(e))
+			    gunState = !gunState;
 		}
 
 		@Override
@@ -173,6 +178,14 @@ public class GameState {
 
     public void setTargetPoint(Point targetPoint) {
         this.targetPoint = targetPoint;
+    }
+
+    public boolean isGunState() {
+        return gunState;
+    }
+
+    public void setGunState(boolean gunState) {
+        this.gunState = gunState;
     }
 }
 

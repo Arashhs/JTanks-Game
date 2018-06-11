@@ -33,7 +33,8 @@ public class GameFrame extends JFrame {
 	public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
 
 	private BufferedImage base;
-    private BufferedImage turret;
+    private BufferedImage turret1;
+    private BufferedImage turret2;
 
     private long lastRender;
 	private ArrayList<Float> fpsHistory;
@@ -49,8 +50,10 @@ public class GameFrame extends JFrame {
 
 		try{
 			base = ImageIO.read(new File("Resources\\tank.png"));
-			turret = ImageIO.read(new File("Resources\\tankGun01.png"));
-		}
+			turret1 = ImageIO.read(new File("Resources\\tankGun01.png"));
+			turret2 = ImageIO.read(new File("Resources\\tankGun2.png"));
+
+        }
 		catch(IOException e){
 			System.out.println(e);
 		}
@@ -120,7 +123,12 @@ public class GameFrame extends JFrame {
             at.rotate(rotation, state.getCenter().x + 33 , state.getCenter().y + 30);
         }
         g2d.setTransform(at);
-		g2d.drawImage(turret, state.getCenter().x , state.getCenter().y , null);
+        if(state.isGunState()) {
+            g2d.drawImage(turret1 , state.getCenter().x, state.getCenter().y, null);
+        }
+        else {
+            g2d.drawImage(turret2 , state.getCenter().x , state.getCenter().y , null);
+        }
 		g2d.setTransform(backupAt);
 
 
