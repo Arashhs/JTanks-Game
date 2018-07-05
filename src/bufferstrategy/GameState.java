@@ -25,6 +25,7 @@ public class GameState {
 	public int locX, locY, tankHeight, tankWidth, diam;
 	public boolean gameOver;
 	public static Level level;
+	public static int sX = 0 , sY = 0;
 	
 	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
