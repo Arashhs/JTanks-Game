@@ -29,7 +29,7 @@ public class GameState {
 	private MouseHandler mouseHandler;
 	private Point targetPoint;
 	private double degree;
-	private boolean gunState;
+	private int gunState;
 	
 	public GameState() {
 		locX = 100;
@@ -48,7 +48,7 @@ public class GameState {
 		//
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
-		gunState = true;
+		gunState = 0;
 	}
 	
 	/**
@@ -147,7 +147,7 @@ public class GameState {
 			mouseY = e.getY();
 			mousePress = true;
 			if(SwingUtilities.isRightMouseButton(e))
-			    gunState = !gunState;
+			    gunState = ++gunState%2 ;
 		}
 
 		@Override
@@ -180,12 +180,12 @@ public class GameState {
         this.targetPoint = targetPoint;
     }
 
-    public boolean isGunState() {
-        return gunState;
-    }
+	public int getGunState() {
+		return gunState;
+	}
 
-    public void setGunState(boolean gunState) {
-        this.gunState = gunState;
-    }
+	public void setGunState(int gunState) {
+		this.gunState = gunState;
+	}
 }
 

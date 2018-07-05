@@ -123,7 +123,7 @@ public class GameFrame extends JFrame {
             at.rotate(rotation, state.getCenter().x + 33 , state.getCenter().y + 30);
         }
         g2d.setTransform(at);
-        if(state.isGunState()) {
+        if(state.getGunState() == 0) {
             g2d.drawImage(turret1 , state.getCenter().x, state.getCenter().y, null);
         }
         else {
