@@ -1,6 +1,9 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import gameMap.Level;
+import gameMap.Tile;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -19,8 +22,9 @@ import java.awt.event.MouseMotionListener;
  */
 public class GameState {
 	
-	public int locX, locY, diam;
+	public int locX, locY, tankHeight, tankWidth, diam;
 	public boolean gameOver;
+	public static Level level;
 	
 	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
@@ -34,6 +38,8 @@ public class GameState {
 	public GameState() {
 		locX = 100;
 		locY = 100;
+		tankHeight = 100;
+		tankWidth = 100;
 		diam = 32;
 		gameOver = false;
 		//
@@ -49,6 +55,7 @@ public class GameState {
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 		gunState = 0;
+		level = new Level();
 	}
 	
 	/**
@@ -70,9 +77,9 @@ public class GameState {
 			locX += 8;
 
 		locX = Math.max(locX, 0);
-		locX = Math.min(locX, GameFrame.GAME_WIDTH - diam);
-		locY = Math.max(locY, 0);
-		locY = Math.min(locY, GameFrame.GAME_HEIGHT - diam);
+		locX = Math.min(locX, GameFrame.GAME_WIDTH - tankHeight);
+		locY = Math.max(locY, 27);
+		locY = Math.min(locY, GameFrame.GAME_HEIGHT - tankWidth);
 	}
 	
 	

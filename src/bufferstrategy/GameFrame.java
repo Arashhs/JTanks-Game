@@ -49,9 +49,9 @@ public class GameFrame extends JFrame {
 		fpsHistory = new ArrayList<>(100);
 
 		try{
-			base = ImageIO.read(new File("Resources\\tank.png"));
-			turret1 = ImageIO.read(new File("Resources\\tankGun01.png"));
-			turret2 = ImageIO.read(new File("Resources\\tankGun2.png"));
+			base = ImageIO.read(new File("res\\tank.png"));
+			turret1 = ImageIO.read(new File("res\\tankGun01.png"));
+			turret2 = ImageIO.read(new File("res\\tankGun2.png"));
 
         }
 		catch(IOException e){
@@ -110,6 +110,7 @@ public class GameFrame extends JFrame {
 		g2d.setColor(Color.GRAY);
 		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		// Draw ball
+		state.level.render(g2d);
 		g2d.setColor(Color.BLACK);
 		g2d.fillOval(state.locX, state.locY, state.diam, state.diam);
 		g2d.drawImage(base,state.locX,state.locY,null);
