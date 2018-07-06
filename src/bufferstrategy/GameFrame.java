@@ -109,6 +109,10 @@ public class GameFrame extends JFrame {
 		// Draw background
 		g2d.setColor(Color.GRAY);
 		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+
+		state.level.tick();
+		state.tank.tick();
+
 		state.level.render(g2d);
 		state.tank.render(g2d , state);
 	/*	g2d.setColor(Color.BLACK);

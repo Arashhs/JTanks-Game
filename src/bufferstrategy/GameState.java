@@ -24,12 +24,12 @@ import java.awt.event.MouseMotionListener;
 public class GameState {
 	
 /*	public int locX, locY, tankHeight, tankWidth, diam; */
-	public Tank tank;
 	public boolean gameOver;
 	public static Level level;
+	public static Tank tank;
 	public static int sX = 0 , sY = 0;
 	
-	private boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
+	public static boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
 	private int mouseX, mouseY;	
 	private KeyHandler keyHandler;
@@ -39,14 +39,11 @@ public class GameState {
 	private double degree;
 	private int gunState;
 	private int mouseStatus = 0;
+	private int view = 0;
 	
 	public GameState() {
+		level = new Level();
 		tank = new Tank();
-		tank.locX = 100;
-		tank.locY = 100;
-		tank.tankHeight = 100;
-		tank.tankWidth = 100;
-		tank.diam = 32;
 		gameOver = false;
 		//
 		keyUP = false;
@@ -61,16 +58,15 @@ public class GameState {
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 		gunState = 0;
-		level = new Level();
 	}
 	
 	/**
 	 * The method which updates the game state.
 	 */
 	public void update() {
-		if (mousePress) {
-/*			locY = mouseY - diam / 2;
-			locX = mouseX - diam / 2; */
+	/*	if (mousePress) {
+			locY = mouseY - diam / 2;
+			locX = mouseX - diam / 2;
 
 		}
 		if (keyUP) {
@@ -93,7 +89,7 @@ public class GameState {
 		tank.locX = Math.max(tank.locX, 0);
 		tank.locX = Math.min(tank.locX, GameFrame.GAME_WIDTH - tank.tankHeight);
 		tank.locY = Math.max(tank.locY, 27);
-		tank.locY = Math.min(tank.locY, GameFrame.GAME_HEIGHT - tank.tankWidth);
+		tank.locY = Math.min(tank.locY, GameFrame.GAME_HEIGHT - tank.tankWidth); */
 	}
 	
 	
@@ -116,23 +112,24 @@ public class GameState {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			switch (e.getKeyCode())
-			{
-				case KeyEvent.VK_UP:
-					keyUP = true;
-					break;
-				case KeyEvent.VK_DOWN:
-					keyDOWN = true;
-					break;
-				case KeyEvent.VK_LEFT:
-					keyLEFT = true;
-					break;
-				case KeyEvent.VK_RIGHT:
-					keyRIGHT = true;
-					break;
-				case KeyEvent.VK_ESCAPE:
-					gameOver = true;
-					break;
+			if (!tank.isColliding(new Point((int) tank.x, (int) tank.y), new Point((int) (tank.x + tank.width), (int) (tank.y + tank.height)))) {
+				switch (e.getKeyCode()) {
+					case KeyEvent.VK_UP:
+						keyUP = true;
+						break;
+					case KeyEvent.VK_DOWN:
+						keyDOWN = true;
+						break;
+					case KeyEvent.VK_LEFT:
+						keyLEFT = true;
+						break;
+					case KeyEvent.VK_RIGHT:
+						keyRIGHT = true;
+						break;
+					case KeyEvent.VK_ESCAPE:
+						gameOver = true;
+						break;
+				}
 			}
 		}
 
@@ -185,18 +182,33 @@ public class GameState {
         @Override
         public void mouseMoved(MouseEvent e) {
 		    targetPoint = e.getPoint();
-		    mouseStatus = ++mouseStatus%2;
+		    mouseStatus = ++mouseStatus % 10;
 		    if(mouseStatus == 0)
 		    	previousPoint=targetPoint;
-		    if(previousPoint != null) {
-				if (targetPoint.x - previousPoint.x < 0)
-					sX -= 2;
+	/*	    if(previousPoint != null) {
+				if (targetPoint.x - previousPoint.x < 0 && tank.locX+tank.tankWidth < GameFrame.GAME_WIDTH){
+					tank.locX += 5;
+					sX -= 5;
 			}
+				else if (targetPoint.x - previousPoint.x > 0 && tank.locX > 0){
+					tank.locX -= 5;
+					sX += 5;
+				}
+				else if (targetPoint.y - previousPoint.y > 0 && tank.locY-tank.tankHeight/2 > 0){
+					tank.locY -= 5;
+					sY += 5;
+				}
+				else if (targetPoint.y - previousPoint.y < 0 && tank.locY + tank.tankHeight < GameFrame.GAME_HEIGHT){
+					tank.locY += 5;
+					sY -= 5;
+				}
+
+		    } */
         }
     }
 
     public Point getCenter(){
-	    Point point = new Point(tank.locX + tank.diam / 2 , tank.locY + tank.diam / 2);
+	    Point point = new Point(tank.locX + tank.diam / 2 - sX , tank.locY + tank.diam / 2 - sY );
 	    return point;
     }
 
