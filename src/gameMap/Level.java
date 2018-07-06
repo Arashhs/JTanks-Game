@@ -1,11 +1,14 @@
 package gameMap;
 
+import bufferstrategy.GameFrame;
+import bufferstrategy.GameState;
+
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Level {
    // public ArrayList<ArrayList<Block>> blocks;
-    public Block[][] blocks = new Block[50][50];
+    public Block[][] blocks = new Block[500][500];
 
     public Level() {
     /*    blocks = new ArrayList<>(50);
@@ -22,11 +25,16 @@ public class Level {
     public void tick(){
 
     }
-    public void render(Graphics g){
-        for(int x = 0 ; x < blocks.length ; x++){
-            for(int y = 0 ; y < blocks[0].length ; y++){
+
+
+
+    public void render(Graphics2D g){
+
+        for (int x = Math.max ((GameState.tank.locX / Tile.tileSize - 7) , 0 )  ; x < Math.min( (GameState.tank.locX / Tile.tileSize) + 9 , blocks[0].length)  ; x++) {
+           for (int y = Math.max ((GameState.tank.locY / Tile.tileSize - 4) , 0 )  ; y < Math.min( (GameState.tank.locY / Tile.tileSize) + 6 , blocks.length)  ; y++){
                 blocks[x][y].render(g);
             }
         }
+
     }
 }
