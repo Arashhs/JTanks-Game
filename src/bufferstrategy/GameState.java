@@ -2,6 +2,7 @@
 package bufferstrategy;
 
 import gameMap.Level;
+import gameMap.Tank;
 import gameMap.Tile;
 
 import javax.swing.*;
@@ -22,7 +23,8 @@ import java.awt.event.MouseMotionListener;
  */
 public class GameState {
 	
-	public int locX, locY, tankHeight, tankWidth, diam;
+/*	public int locX, locY, tankHeight, tankWidth, diam; */
+	public Tank tank;
 	public boolean gameOver;
 	public static Level level;
 	public static int sX = 0 , sY = 0;
@@ -33,15 +35,18 @@ public class GameState {
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
 	private Point targetPoint;
+	private Point previousPoint;
 	private double degree;
 	private int gunState;
+	private int mouseStatus = 0;
 	
 	public GameState() {
-		locX = 100;
-		locY = 100;
-		tankHeight = 100;
-		tankWidth = 100;
-		diam = 32;
+		tank = new Tank();
+		tank.locX = 100;
+		tank.locY = 100;
+		tank.tankHeight = 100;
+		tank.tankWidth = 100;
+		tank.diam = 32;
 		gameOver = false;
 		//
 		keyUP = false;
@@ -68,19 +73,27 @@ public class GameState {
 			locX = mouseX - diam / 2; */
 
 		}
-		if (keyUP)
-			locY -= 8;
-		if (keyDOWN)
-			locY += 8;
-		if (keyLEFT)
-			locX -= 8;
-		if (keyRIGHT)
-			locX += 8;
+		if (keyUP) {
+			tank.locY -= 3;
+			sY -= 3;
+		}
+		if (keyDOWN) {
+			tank.locY += 3;
+			sY += 3;
+		}
+		if (keyLEFT) {
+			tank.locX -= 3;
+			sX -= 3;
+		}
+		if (keyRIGHT) {
+			tank.locX += 3;
+			sX += 3;
+		}
 
-		locX = Math.max(locX, 0);
-		locX = Math.min(locX, GameFrame.GAME_WIDTH - tankHeight);
-		locY = Math.max(locY, 27);
-		locY = Math.min(locY, GameFrame.GAME_HEIGHT - tankWidth);
+		tank.locX = Math.max(tank.locX, 0);
+		tank.locX = Math.min(tank.locX, GameFrame.GAME_WIDTH - tank.tankHeight);
+		tank.locY = Math.max(tank.locY, 27);
+		tank.locY = Math.min(tank.locY, GameFrame.GAME_HEIGHT - tank.tankWidth);
 	}
 	
 	
@@ -172,11 +185,18 @@ public class GameState {
         @Override
         public void mouseMoved(MouseEvent e) {
 		    targetPoint = e.getPoint();
+		    mouseStatus = ++mouseStatus%2;
+		    if(mouseStatus == 0)
+		    	previousPoint=targetPoint;
+		    if(previousPoint != null) {
+				if (targetPoint.x - previousPoint.x < 0)
+					sX -= 2;
+			}
         }
     }
 
     public Point getCenter(){
-	    Point point = new Point(locX + diam / 2 , locY + diam / 2);
+	    Point point = new Point(tank.locX + tank.diam / 2 , tank.locY + tank.diam / 2);
 	    return point;
     }
 

@@ -32,9 +32,9 @@ public class GameFrame extends JFrame {
 	public static final int GAME_HEIGHT = 720;                  // 720p game resolution
 	public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
 
-	private BufferedImage base;
+/*	private BufferedImage base;
     private BufferedImage turret1;
-    private BufferedImage turret2;
+    private BufferedImage turret2; */
 
     private long lastRender;
 	private ArrayList<Float> fpsHistory;
@@ -48,7 +48,7 @@ public class GameFrame extends JFrame {
 		lastRender = -1;
 		fpsHistory = new ArrayList<>(100);
 
-		try{
+	/*	try{
 			base = ImageIO.read(new File("res\\tank.png"));
 			turret1 = ImageIO.read(new File("res\\tankGun01.png"));
 			turret2 = ImageIO.read(new File("res\\tankGun2.png"));
@@ -56,7 +56,7 @@ public class GameFrame extends JFrame {
         }
 		catch(IOException e){
 			System.out.println(e);
-		}
+		} */
 	}
 	
 	/**
@@ -109,9 +109,9 @@ public class GameFrame extends JFrame {
 		// Draw background
 		g2d.setColor(Color.GRAY);
 		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-		// Draw ball
 		state.level.render(g2d);
-		g2d.setColor(Color.BLACK);
+		state.tank.render(g2d , state);
+	/*	g2d.setColor(Color.BLACK);
 		g2d.fillOval(state.locX, state.locY, state.diam, state.diam);
 		g2d.drawImage(base,state.locX,state.locY,null);
 		AffineTransform backupAt = g2d.getTransform();
@@ -130,7 +130,7 @@ public class GameFrame extends JFrame {
         else {
             g2d.drawImage(turret2 , state.getCenter().x , state.getCenter().y , null);
         }
-		g2d.setTransform(backupAt);
+		g2d.setTransform(backupAt); */
 
 
 
