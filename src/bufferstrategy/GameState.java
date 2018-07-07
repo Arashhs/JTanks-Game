@@ -112,7 +112,7 @@ public class GameState {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if (!tank.isColliding(new Point((int) tank.x, (int) tank.y), new Point((int) (tank.x + tank.width), (int) (tank.y + tank.height)))) {
+			if (!tank.isColliding(new Point((int) tank.x + sX , (int) tank.y + sY), new Point((int) (tank.x + tank.width) + sX , (int) (tank.y + tank.height + sY)))) {
 				switch (e.getKeyCode()) {
 					case KeyEvent.VK_UP:
 						keyUP = true;

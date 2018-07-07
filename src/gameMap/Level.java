@@ -20,6 +20,10 @@ public class Level {
             blocks[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , Tile.soil);
         }
     }
+    blocks[0][0].setId(1);
+    blocks[5][5].setId(1);
+    blocks[0][0].setCollidable(true);
+    blocks[5][5].setCollidable(true);
     }
 
     public void tick(){
@@ -30,11 +34,10 @@ public class Level {
 
     public void render(Graphics2D g){
 
-        for (int x = Math.max ((GameState.tank.locX / Tile.tileSize - 7) , 0 )  ; x < Math.min( (GameState.tank.locX / Tile.tileSize) + 9 , blocks[0].length)  ; x++) {
-           for (int y = Math.max ((GameState.tank.locY / Tile.tileSize - 4) , 0 )  ; y < Math.min( (GameState.tank.locY / Tile.tileSize) + 6 , blocks.length)  ; y++){
+        for (int x = Math.max ((GameState.tank.locX / Tile.tileSize - 9) , 0 )  ; x < Math.min( (GameState.tank.locX / Tile.tileSize) + 13 , blocks[0].length)  ; x++) {
+           for (int y = Math.max ((GameState.tank.locY / Tile.tileSize - 6) , 0 )  ; y < Math.min( (GameState.tank.locY / Tile.tileSize) + 13 , blocks.length)  ; y++){
                 blocks[x][y].render(g);
             }
         }
-
     }
 }

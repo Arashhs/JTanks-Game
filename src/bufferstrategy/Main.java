@@ -16,7 +16,6 @@ public class Main {
     public static void main(String[] args) {
 		// Initialize the global thread-pool
 		ThreadPool.init();
-		new Tile(); //Load images
 
 		// Show the game menu ...
 		
@@ -24,6 +23,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				new Tile(); //load Images
 				GameFrame frame = new GameFrame("JTanks");
 				frame.setLocationRelativeTo(null); // put frame at center of screen
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
