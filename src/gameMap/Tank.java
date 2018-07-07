@@ -5,6 +5,7 @@ import bufferstrategy.GameState;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 import java.awt.geom.Line2D;
 
 public class Tank extends Rectangle {
@@ -22,25 +23,33 @@ public class Tank extends Rectangle {
     public void tick() {
          {
             if (GameState.keyUP) {
-                GameState.tank.locY -= 5;
-                GameState.sY -= 5;
-            }
+                if (!isColliding(new Rectangle(x + GameState.sX , y - 6 + GameState.sY , tankWidth , tankHeight))) {
+                    GameState.tank.locY -= 5;
+                    GameState.sY -= 5;
+                }
+                }
             if (GameState.keyDOWN) {
-                GameState.tank.locY += 5;
-                GameState.sY += 5;
+                if (!isColliding(new Rectangle(x + GameState.sX , y + 5 + GameState.sY , tankWidth , tankHeight))) {
+                    GameState.tank.locY += 5;
+                    GameState.sY += 5;
+                }
             }
             if (GameState.keyLEFT) {
-                GameState.tank.locX -= 5;
-                GameState.sX -= 5;
+                if (!isColliding(new Rectangle(x - 6 + GameState.sX , y  + GameState.sY , tankWidth , tankHeight))) {
+                    GameState.tank.locX -= 5;
+                    GameState.sX -= 5;
+                }
             }
             if (GameState.keyRIGHT) {
-                GameState.tank.locX += 5;
-                GameState.sX += 5;
+                if (!isColliding(new Rectangle(x + 6 + GameState.sX , y  + GameState.sY , tankWidth , tankHeight))) {
+                    GameState.tank.locX += 5;
+                    GameState.sX += 5;
+                }
             }
         }
     }
 
-    public boolean isColliding(Point p1 , Point p2){
+/*    public boolean isColliding(Point p1 , Point p2){
         for(int i = (int) ( (x + GameState.sX) / Tile.tileSize); i < (int) ( (x + GameState.sX + GameFrame.GAME_WIDTH) / Tile.tileSize ) ; i++) {
             for (int j = (int) ( (y + GameState.sY) / Tile.tileSize); j < (int) ( (y + GameState.sY + GameFrame.GAME_HEIGHT)  / Tile.tileSize ); j++) {
                 if((i==0 && j==0) || (i==7 && j==7)){
@@ -49,6 +58,16 @@ public class Tank extends Rectangle {
                 if((GameState.level.blocks[i][j].isCollidable()) && (GameState.level.blocks[i][j].contains(p1) || GameState.level.blocks[i][j].contains(p2)))
                     return true;
 
+            }
+        }
+        return false;
+    } */
+
+    public boolean isColliding( Rectangle rectangle){
+        for(int i = Math.max ((int) ( (x + GameState.sX) / Tile.tileSize) - 1 , 0) ; i < (int) ( (x + GameState.sX + width) / Tile.tileSize ) + 1 ; i++) {
+            for (int j = Math.max((int) ( (y + GameState.sY) / Tile.tileSize) - 1 , 0) ; j < (int) ( (y + GameState.sY + height)  / Tile.tileSize ) + 1 + 1; j++) {
+                    if (GameState.level.blocks[i][j].isCollidable() && rectangle.intersects(GameState.level.blocks[i][j]))
+                        return true;
             }
         }
         return false;
