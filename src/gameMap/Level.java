@@ -14,15 +14,11 @@ public class Level {
     public Block[][] blocks = new Block[500][500];
 
     public Level() {
-    /*    blocks = new ArrayList<>(50);
-        for(ArrayList<Block> b : blocks){
-            b = new ArrayList<>(50);
-        }
-    for(int x = 0 ; x < blocks.length ; x++){
-        for(int y = 0 ; y < blocks[0].length ; y++){
-            blocks[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , Tile.soil);
-        }
 
+  /*  for(int x = 0 ; x < blocks.length ; x++){
+        for(int y = 0 ; y < blocks[0].length ; y++){
+            blocks[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , Tile.soil , Tile.tileSet_soil);
+        }
     }
     blocks[0][0].setId(1);
     blocks[5][5].setId(1);
@@ -42,16 +38,15 @@ public class Level {
 
 
     public void render(Graphics2D g){
-
         for (int x = Math.max ((GameState.tank.locX / Tile.tileSize - 9) , 0 )  ; x < Math.min( (GameState.tank.locX / Tile.tileSize) + 13 , blocks.length)  ; x++) {
            for (int y = Math.max ((GameState.tank.locY / Tile.tileSize - 6) , 0 )  ; y < Math.min( (GameState.tank.locY / Tile.tileSize) + 13 , blocks[x].length)  ; y++){
-                blocks[x][y].render(g);
+                  blocks[x][y].render(g);
             }
         }
     }
 
     public Block[][] loadMap(String filename) throws IOException {
-        ArrayList lines = new ArrayList();
+        ArrayList<String> lines = new ArrayList();
         int width = 0;
         int height = 0;
         // read every line in the text file into the list
@@ -74,10 +69,14 @@ public class Level {
         height = lines.size();
         Block[][] newMap = new Block[height][width];
         for (int y=0; y<height; y++) {
-            String line = (String)lines.get(y);
-            for (int x=0; x<line.length(); x++) {
+            String line = lines.get(y);
+            for (int x=0; x<width; x++) {
+                blocks[y][x] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , Tile.soil , Tile.tileSet_soil);
                 char ch = line.charAt(x);
+
                 // check if the char represents tile A, B, C, etc.
+                if(ch == ' ')
+                    ch = 'A';
                 int tile = ch - 'A';
                 if (tile >= 0 && tile < Tile.tileImages.size()) {
                     newMap[y][x] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(tile));

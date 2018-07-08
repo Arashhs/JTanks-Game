@@ -64,8 +64,8 @@ public class Tank extends Rectangle {
     } */
 
     public boolean isColliding( Rectangle rectangle){
-        for(int i = Math.max ((int) ( (x + GameState.sX) / Tile.tileSize) - 1 , 0) ; i < (int) ( (x + GameState.sX + width) / Tile.tileSize ) + 1 ; i++) {
-            for (int j = Math.max((int) ( (y + GameState.sY) / Tile.tileSize) - 1 , 0) ; j < (int) ( (y + GameState.sY + height)  / Tile.tileSize ) + 1 + 1; j++) {
+        for(int i = Math.max ((int) ( (x + GameState.sX) / Tile.tileSize) - 1 , 0) ; i < Math.min ( (int) ( (x + GameState.sX + width) / Tile.tileSize ) + 1 , GameState.level.blocks.length ) ; i++) {
+            for (int j = Math.max((int) ( (y + GameState.sY) / Tile.tileSize) - 1 , 0) ; j < Math.min ( (int) ( (y + GameState.sY + height)  / Tile.tileSize ) + 1 + 1 , GameState.level.blocks[i].length ); j++) {
                     if (GameState.level.blocks[i][j].isCollidable() && rectangle.intersects(GameState.level.blocks[i][j]))
                         return true;
             }
