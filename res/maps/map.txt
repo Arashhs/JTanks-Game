@@ -1,0 +1,37 @@
+# Map file for tile-based game
+# (Lines that start with '#' are comments)
+# The tiles are:
+# (Space) Empty tile
+# A..Z Tiles A through Z
+# o Star
+# ! Music Note
+# * Goal
+# 1 Bad Guy 1 (grub)
+# 2 Bad Guy 2 (fly)
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+B                          BBB                                           JJ       JJ      BBBB         JJJJJJ
+B                          BBB                                           JJ       JJ      BBBB         JJJJJJ
+B    CCCCCCCCCCC           BBB               BBBBBBBBBBBBBBB             JJ       JJ      BBBB         JJJJJJ
+B    C         C           BBB               BB     BBBBBBBBB            JJ       JJ      BBBBJDDDDDDDJJJJJJJJJJJJJJ
+B    C         C           BBB              BBBDDDDDBBBBBBBBBBBBBBBB     JJJJJJJJJJJJJJJJJBBBB             JJJJJJ
+B    C         CCCCCCCC    BBB             BB                DD   BB                     BBBB              JJJJJJ
+B    C               CC    BBBJJJJJJJJ     BB                DD   BB                     BBBB              JJJJJJ
+B    C                BDDDBBBB                  CCCCCCCCCC   DD   BB                     BBBB              JJJJJJ
+B    C                B   BBBB                  CMMMMMMMMC   BBBBBBB                     BBBB              JJJJJJ                         B
+B    C                B   BBBB                  CMMMMMMMMC       BBB                                       JJJJJJ                         B
+B    CCCCCCC    CCCCCCBBBBBBBBJJJJJJJJJJJJ      CCCCCCCCCC       BBB                                       JJJJJJ                         B
+B     J                 BBB             JJ      C       C        BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB            JJJJJJJJJJJJ                   B
+B     J                 BBB              J       C     C       BBBBBBCCCCCCCCC                             DD     BBBBB                   B
+B     J                 BBB              J                    BBBBBBBCCMMMMCCC                             DD     BBBBB                  BB
+B     J                 BBB                                   BBBBBBBBBCCMMC                               DD     BBBBB                  BB
+B                      BBBJJJJJJ    JJJ         CCCCCCCC      BBBBBBBBBBCCCC            BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB      BBBBBBB
+B                      BBB            J                       BBBBBBBBBBBBB             JJJJ                                             BB
+B                      BBB            JBBBBBBBBB              BBBBBBBBBBBBB             JJJJ                                             BB
+B                      BBB            J                   BBBBBBBBBBBBCJJJJ         JJJJ                 CCCCCCCCCCCC                    BB
+B                      BBB            J                   BBB       BBCJJJJ        JJJJ                 CCMMMMMMMCCC                     BB
+B                      BBB            J                   BBB       BBCJJJJ        JJJJ                 CCCCCCCCCCCC                     BB
+B                      BBBBB      BBBBBBBBBBBBBBBBBBBBBBBBBBBDDDDDDDBB             JJJJ                 CC         CC                    BB
+B                                 JJJJJJJJ            CCCCCCCC                     JJJJ                                                  BB
+B                                 JJJJJJJJ            CCMMMMCC                                                                           BB
+B                                 JJJJJJJJ            CCMMMMCC                                                                          BBB
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB

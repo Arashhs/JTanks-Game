@@ -70,10 +70,16 @@ public class Level {
         for (int y=0; y<height; y++) {
             String line = lines.get(y);
             for (int x=0; x<width; x++) {
-                char ch = line.charAt(x);
+                char ch = 'A';
+               try {
+                    ch = line.charAt(x);
+               }
+               catch (StringIndexOutOfBoundsException e){
+                   ch = 'B';
+               }
 
                 // check if the char represents tile A, B, C, etc.
-                if(ch == ' ')
+                if(ch == ' ' || ch == 0)
                     ch = 'A';
                 int tile = ch - 'A';
                 if (tile >= 0 && tile < Tile.tileImages.size()) {
