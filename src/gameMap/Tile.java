@@ -12,13 +12,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Tile {
     public static final int tileSize = 64;
-    public static int soil = 0;
-    public static int wall = 1;
 
     public static BufferedImage tileSet_soil;
     public static BufferedImage base;
     public static BufferedImage turret1;
     public static BufferedImage turret2;
+    public static BufferedImage missle;
 
     public static CopyOnWriteArrayList<BufferedImage> tileImages;
 
@@ -29,6 +28,7 @@ public class Tile {
             base = ImageIO.read(new File("res\\assets\\tank.png"));
             turret1 = ImageIO.read(new File("res\\assets\\tankGun01.png"));
             turret2 = ImageIO.read(new File("res\\assets\\tankGun2.png"));
+            missle = ImageIO.read(new File("res\\assets\\HeavyBullet.png"));
             loadTileImages();
         } catch (IOException e) {
             e.printStackTrace();
