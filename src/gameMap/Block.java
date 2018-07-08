@@ -17,6 +17,7 @@ public class Block extends Rectangle {
         collidable = false;
         destructable = false;
         this.image = image;
+        init();
     }
 
     public void render(Graphics2D g) {
@@ -27,6 +28,25 @@ public class Block extends Rectangle {
             g.drawImage(Tile.base , x - GameState.sX , y - GameState.sY , Tile.tileSize , Tile.tileSize , null); */
       g.drawImage(image , x - GameState.sX , y - GameState.sY , Tile.tileSize , Tile.tileSize , null);
 
+    }
+
+    public void init(){
+        char c = (char) ('A' + id);
+        switch (c){
+            case 'B':
+            case 'C':
+            case 'I':
+            case 'J':
+                collidable = true;
+                break;
+            case 'D':
+            case 'E':
+            case 'F':
+            case 'G':
+                collidable = true;
+                destructable = true;
+                break;
+        }
     }
 
     public int getId() {

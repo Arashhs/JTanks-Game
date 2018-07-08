@@ -39,9 +39,10 @@ public class Tank extends Rectangle {
                     GameState.tank.locX -= 5;
                     GameState.sX -= 5;
                 }
+
             }
             if (GameState.keyRIGHT) {
-                if (!isColliding(new Rectangle(x + 6 + GameState.sX , y  + GameState.sY , tankWidth , tankHeight))) {
+                if (!isColliding(new Rectangle(x + 8 + GameState.sX , y  + GameState.sY , tankWidth , tankHeight))) {
                     GameState.tank.locX += 5;
                     GameState.sX += 5;
                 }
@@ -65,9 +66,10 @@ public class Tank extends Rectangle {
 
     public boolean isColliding( Rectangle rectangle){
         for(int i = Math.max ((int) ( (x + GameState.sX) / Tile.tileSize) - 1 , 0) ; i < Math.min ( (int) ( (x + GameState.sX + width) / Tile.tileSize ) + 1 , GameState.level.blocks.length ) ; i++) {
-            for (int j = Math.max((int) ( (y + GameState.sY) / Tile.tileSize) - 1 , 0) ; j < Math.min ( (int) ( (y + GameState.sY + height)  / Tile.tileSize ) + 1 + 1 , GameState.level.blocks[i].length ); j++) {
-                    if (GameState.level.blocks[i][j].isCollidable() && rectangle.intersects(GameState.level.blocks[i][j]))
-                        return true;
+            for (int j = Math.max((int) ( (y + GameState.sY) / Tile.tileSize) - 1 , 0) ; j < Math.min ( (int) ( (y + GameState.sY + height)  / Tile.tileSize ) + 1  , GameState.level.blocks[i].length ); j++) {
+                if (GameState.level.blocks[i][j].isCollidable() && rectangle.intersects(GameState.level.blocks[i][j])) {
+                    return true;
+                }
             }
         }
         return false;
