@@ -7,7 +7,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public abstract class Sprite extends Rectangle {
-    protected int x, y, width, height, diam;
+    protected int diam;
     protected double angle;
     protected BufferedImage image;
 
@@ -20,8 +20,8 @@ public abstract class Sprite extends Rectangle {
     public static final int STATE_Dead = 1;
     public static final int STATE_Alive = 0;
 
-    private AffineTransform backupAt;
-    private AffineTransform at;
+    protected AffineTransform backupAt;
+    protected AffineTransform at;
 
     public Sprite(int x, int y, int width, int height) {
         this.x = x;
