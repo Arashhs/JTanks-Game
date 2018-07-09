@@ -1,9 +1,7 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
-import gameMap.Level;
-import gameMap.Tank;
-import gameMap.Tile;
+import gameMap.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 /**
  * This class holds the state of game and all of its elements.
@@ -28,19 +27,21 @@ public class GameState {
 	public static Level level;
 	public static Tank tank;
 	public static int sX = 0 , sY = 0;
+	public Enemies enemies;
 	
 	public static boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
 	private int mouseX, mouseY;	
 	private KeyHandler keyHandler;
 	private MouseHandler mouseHandler;
-	private Point targetPoint;
+	private static Point targetPoint;
 	private Point previousPoint;
 	private double degree;
 	private int gunState;
 	private int mouseStatus = 0;
 	private int view = 0;
-	
+	private int fireConst;
+
 	public GameState() {
 		level = new Level();
 		tank = new Tank();
@@ -58,6 +59,8 @@ public class GameState {
 		keyHandler = new KeyHandler();
 		mouseHandler = new MouseHandler();
 		gunState = 0;
+		fireConst = 0;
+		enemies = new Enemies(1);
 	}
 	
 	/**
@@ -165,6 +168,19 @@ public class GameState {
 			mousePress = true;
 			if(SwingUtilities.isRightMouseButton(e))
 			    gunState = ++gunState%2 ;
+			if(SwingUtilities.isLeftMouseButton(e)){
+				BulletSprite bullet = null;
+				switch (gunState){
+					case 0:
+						bullet = new Missile(tank);
+						break;
+					case 1:
+						bullet = new LightBullet(tank);
+						break;
+				}
+				tank.getBulletSprites().add(bullet);
+				bullet.shoot();
+			}
 		}
 
 		@Override
@@ -172,10 +188,11 @@ public class GameState {
 			mousePress = false;
 		}
 
-		@Override
-		public void mouseDragged(MouseEvent e) {
-			mouseX = e.getX();
-			mouseY = e.getY();
+		public void mouseDragged(MouseEvent e){
+			targetPoint = e.getPoint();
+			mouseStatus = ++mouseStatus % 10;
+			if(mouseStatus == 0)
+				previousPoint=targetPoint;
 		}
 
         @Override
@@ -211,7 +228,7 @@ public class GameState {
 	    return point;
     }
 
-    public Point getTargetPoint() {
+    public static Point getTargetPoint() {
         return targetPoint;
     }
 
@@ -226,5 +243,24 @@ public class GameState {
 	public void setGunState(int gunState) {
 		this.gunState = gunState;
 	}
+
+	public int getMouseX() {
+		return mouseX;
+	}
+
+	public int getMouseY() {
+		return mouseY;
+	}
+
+	public void checkFireConstant(){
+		fireConst++;
+		BulletSprite bullet = null;
+		if(mousePress && fireConst % 8 == 0 && gunState == 1) {
+			bullet = new LightBullet(tank);
+			tank.getBulletSprites().add(bullet);
+			bullet.shoot();
+		}
+	}
+
 }
 

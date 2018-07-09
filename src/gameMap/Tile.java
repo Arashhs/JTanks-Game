@@ -20,6 +20,8 @@ public class Tile {
     public static BufferedImage turret2;
     public static BufferedImage missle;
     public static BufferedImage lightBullet;
+    public static BufferedImage bigEnemyBase;
+    public static BufferedImage bigEnemyTurret;
 
     public static CopyOnWriteArrayList<BufferedImage> tileImages;
 
@@ -33,6 +35,8 @@ public class Tile {
             turret2 = ImageIO.read(new File("res\\assets\\tankGun2.png"));
             missle = ImageIO.read(new File("res\\assets\\HeavyBullet.png"));
             lightBullet = ImageIO.read(new File("res\\assets\\LightBullet.png"));
+            bigEnemyBase = ImageIO.read(new File("res\\assets\\BigEnemy.png"));
+            bigEnemyTurret = ImageIO.read(new File("res\\assets\\BigEnemyGun.png"));
             loadTileImages();
         } catch (IOException e) {
             e.printStackTrace();

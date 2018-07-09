@@ -115,7 +115,7 @@ public class GameFrame extends JFrame {
 		state.level.tick();
 		state.tank.tick();
 
-		state.level.render(g2d);
+		state.level.render(g2d , state);
 		state.tank.render(g2d , state);
 	/*	g2d.setColor(Color.BLACK);
 		g2d.fillOval(state.locX, state.locY, state.diam, state.diam);
