@@ -36,9 +36,9 @@ public class Level {
 
 
 
-    public void render(Graphics2D g){
-        for (int i = Math.max ((GameState.tank.locX / Tile.tileSize - 9) , 0 )  ; i < Math.min( (GameState.tank.locX / Tile.tileSize) + 13 , blocks.length)  ; i++) {
-           for (int j = Math.max ((GameState.tank.locY / Tile.tileSize - 6) , 0 )  ; j < Math.min( (GameState.tank.locY / Tile.tileSize) + 13 , blocks[i].length)  ; j++){
+    public void render(Graphics2D g , GameState state){
+        for (int i = Math.max ((state.tank.locX / Tile.tileSize - 9) , 0 )  ; i < Math.min( (state.tank.locX / Tile.tileSize) + 13 , blocks.length)  ; i++) {
+           for (int j = Math.max ((state.tank.locY / Tile.tileSize - 6) , 0 )  ; j < Math.min( (state.tank.locY / Tile.tileSize) + 13 , blocks[i].length)  ; j++){
                   blocks[i][j].render(g);
             }
         }

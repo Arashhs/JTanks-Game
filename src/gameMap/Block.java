@@ -10,12 +10,14 @@ public class Block extends Rectangle {
     private int id; //Specify block's type (Dirt , grass , etc)
     private boolean collidable;
     private boolean destructable;
+    private boolean bulletCollidable;
 
     public Block(Rectangle r, int id , BufferedImage image) {
         setBounds(r);
         this.id = id;
         collidable = false;
         destructable = false;
+        bulletCollidable = false;
         this.image = image;
         init();
     }
@@ -34,8 +36,9 @@ public class Block extends Rectangle {
         char c = (char) ('A' + id);
         switch (c){
             case 'B':
-            case 'C':
             case 'I':
+                bulletCollidable = true;
+            case 'C':
             case 'J':
                 collidable = true;
                 break;
@@ -45,6 +48,7 @@ public class Block extends Rectangle {
             case 'G':
                 collidable = true;
                 destructable = true;
+                bulletCollidable = true;
                 break;
         }
     }
@@ -71,5 +75,13 @@ public class Block extends Rectangle {
 
     public void setDestructable(boolean destructable) {
         this.destructable = destructable;
+    }
+
+    public boolean isBulletCollidable() {
+        return bulletCollidable;
+    }
+
+    public void setBulletCollidable(boolean bulletCollidable) {
+        this.bulletCollidable = bulletCollidable;
     }
 }

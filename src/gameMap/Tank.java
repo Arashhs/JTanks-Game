@@ -7,10 +7,12 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Line2D;
+import java.util.ArrayList;
 
 public class Tank extends Rectangle {
     public int locX, locY, tankHeight, tankWidth, diam;
-    public Missle missle;
+
+    private ArrayList<Missile> missiles;
 
     public Tank() {
         locX = 500;
@@ -19,31 +21,32 @@ public class Tank extends Rectangle {
         tankWidth = 100;
         diam = 32;
         setBounds(locX, locY, tankHeight, tankWidth);
+        missiles = new ArrayList<Missile>();
     }
 
     public void tick() {
-         {
+        {
             if (GameState.keyUP) {
-                if (!isColliding(new Rectangle(x + GameState.sX , y - 7 + GameState.sY , tankWidth , tankHeight))) {
+                if (!isColliding(new Rectangle(x + GameState.sX, y - 7 + GameState.sY, tankWidth, tankHeight))) {
                     GameState.tank.locY -= 5;
                     GameState.sY -= 5;
                 }
-                }
+            }
             if (GameState.keyDOWN) {
-                if (!isColliding(new Rectangle(x + GameState.sX , y + 7 + GameState.sY , tankWidth , tankHeight))) {
+                if (!isColliding(new Rectangle(x + GameState.sX, y + 7 + GameState.sY, tankWidth, tankHeight))) {
                     GameState.tank.locY += 5;
                     GameState.sY += 5;
                 }
             }
             if (GameState.keyLEFT) {
-                if (!isColliding(new Rectangle(x - 7 + GameState.sX , y  + GameState.sY , tankWidth , tankHeight))) {
+                if (!isColliding(new Rectangle(x - 7 + GameState.sX, y + GameState.sY, tankWidth, tankHeight))) {
                     GameState.tank.locX -= 5;
                     GameState.sX -= 5;
                 }
 
             }
             if (GameState.keyRIGHT) {
-                if (!isColliding(new Rectangle(x + 7 + GameState.sX , y  + GameState.sY , tankWidth , tankHeight))) {
+                if (!isColliding(new Rectangle(x + 7 + GameState.sX, y + GameState.sY, tankWidth, tankHeight))) {
                     GameState.tank.locX += 5;
                     GameState.sX += 5;
                 }
@@ -65,9 +68,9 @@ public class Tank extends Rectangle {
         return false;
     } */
 
-    public boolean isColliding( Rectangle rectangle){
-        for(int i = Math.max ((int) ( (x + GameState.sX) / Tile.tileSize) - 1 , 0) ; i < Math.min ( (int) ( (x + GameState.sX + width) / Tile.tileSize ) + 2 , GameState.level.blocks.length ) ; i++) {
-            for (int j = Math.max((int) ( (y + GameState.sY) / Tile.tileSize) - 1 , 0) ; j < Math.min ( (int) ( (y + GameState.sY + height)  / Tile.tileSize ) + 2  , GameState.level.blocks[i].length ); j++) {
+    public boolean isColliding(Rectangle rectangle) {
+        for (int i = Math.max((int) ((x + GameState.sX) / Tile.tileSize) - 1, 0); i < Math.min((int) ((x + GameState.sX + width) / Tile.tileSize) + 2, GameState.level.blocks.length); i++) {
+            for (int j = Math.max((int) ((y + GameState.sY) / Tile.tileSize) - 1, 0); j < Math.min((int) ((y + GameState.sY + height) / Tile.tileSize) + 2, GameState.level.blocks[i].length); j++) {
                 if (GameState.level.blocks[i][j].isCollidable() && rectangle.intersects(GameState.level.blocks[i][j])) {
                     return true;
                 }
@@ -77,10 +80,9 @@ public class Tank extends Rectangle {
     }
 
 
-
     public void render(Graphics2D g2d, GameState state) {
 
-        g2d.drawImage(Tile.base , locX - state.sX , locY - state.sY ,  null);
+        g2d.drawImage(Tile.base, locX - state.sX, locY - state.sY, null);
         AffineTransform backupAt = g2d.getTransform();
         AffineTransform at = new AffineTransform();
         if (state.getTargetPoint() != null) {
@@ -88,18 +90,25 @@ public class Tank extends Rectangle {
             double deltaX = -(state.getCenter().x + 33) + state.getTargetPoint().x;
             double deltaY = -(state.getCenter().y + 30) + state.getTargetPoint().y;
             double rotation = Math.atan2(deltaY, deltaX);
-            at.rotate(rotation, state.getCenter().x + 33, state.getCenter().y + 30 );
+            at.rotate(rotation, state.getCenter().x + 33, state.getCenter().y + 30);
         }
         g2d.setTransform(at);
         if (state.getGunState() == 0) {
-            g2d.drawImage(Tile.turret1, state.getCenter().x, state.getCenter().y , null);
+            g2d.drawImage(Tile.turret1, state.getCenter().x, state.getCenter().y, null);
         } else {
-            g2d.drawImage(Tile.turret2, state.getCenter().x, state.getCenter().y  , null);
+            g2d.drawImage(Tile.turret2, state.getCenter().x, state.getCenter().y, null);
         }
-
         g2d.setTransform(backupAt);
-        if(missle != null && missle.isShooting())
-            missle.move(g2d);
+        for (int i = 0; i < missiles.size(); i++) {
+            if (missiles.get(i).state == Sprite.STATE_Dead) {
+                missiles.remove(i);
+                continue;
+            }
+            missiles.get(i).move(g2d);
+        }
     }
 
+    public ArrayList<Missile> getMissiles() {
+        return missiles;
+    }
 }
