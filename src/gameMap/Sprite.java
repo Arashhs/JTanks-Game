@@ -52,6 +52,9 @@ public abstract class Sprite extends Rectangle {
         for (int i = Math.max((int) ((x) / Tile.tileSize) - 2 , 0); i < Math.min((int) ((x + width) / Tile.tileSize) + 2, GameState.level.blocks.length); i++) {
             for (int j = Math.max((int) ((y) / Tile.tileSize) - 2, 0); j < Math.min((int) ((y+ height) / Tile.tileSize) + 2, GameState.level.blocks[i].length); j++) {
                     if ((GameState.level.blocks[i][j].isBulletCollidable()) && (rectangle.intersects(GameState.level.blocks[i][j]))) {
+                        if(GameState.level.blocks[i][j].isDestructable()){
+                            GameState.level.blocks[i][j].nextId();
+                        }
                         return true;
                     }
             }

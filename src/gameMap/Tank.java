@@ -100,7 +100,7 @@ public class Tank extends Rectangle {
         }
         g2d.setTransform(backupAt);
         for (int i = 0; i < missiles.size(); i++) {
-            if (missiles.get(i).state == Sprite.STATE_Dead) {
+            if (missiles.get(i).isCollided()) {
                 missiles.remove(i);
                 continue;
             }

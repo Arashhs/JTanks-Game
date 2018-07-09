@@ -35,12 +35,23 @@ public class Block extends Rectangle {
     public void init(){
         char c = (char) ('A' + id);
         switch (c){
+            case 'A':
+            case 'H':
+                bulletCollidable = false;
+                collidable = false;
+                destructable = false;
+                break;
             case 'B':
-            case 'I':
                 bulletCollidable = true;
+                collidable = true;
+                destructable = false;
+                break;
+            case 'I':
             case 'C':
             case 'J':
                 collidable = true;
+                bulletCollidable = false;
+                destructable = false;
                 break;
             case 'D':
             case 'E':
@@ -59,6 +70,12 @@ public class Block extends Rectangle {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void nextId(){
+        id++;
+        image = Tile.tileImages.get(id);
+        init();
     }
 
     public boolean isCollidable() {
