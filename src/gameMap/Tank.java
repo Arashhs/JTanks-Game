@@ -10,6 +10,7 @@ import java.awt.geom.Line2D;
 
 public class Tank extends Rectangle {
     public int locX, locY, tankHeight, tankWidth, diam;
+    public Missle missle;
 
     public Tank() {
         locX = 500;
@@ -95,6 +96,10 @@ public class Tank extends Rectangle {
         } else {
             g2d.drawImage(Tile.turret2, state.getCenter().x, state.getCenter().y  , null);
         }
+
         g2d.setTransform(backupAt);
+        if(missle != null && missle.isShooting())
+            missle.move(g2d);
     }
+
 }

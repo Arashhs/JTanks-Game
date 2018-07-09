@@ -9,8 +9,8 @@ public abstract class Sprite extends Rectangle {
     protected BufferedImage image;
 
     // velocity (pixels per millisecond)
-    protected int dx;
-    protected int dy;
+    protected double dx;
+    protected double dy;
 
     public Sprite(int x, int y, int width, int height) {
         this.x = x;
@@ -18,10 +18,14 @@ public abstract class Sprite extends Rectangle {
         this.width = width;
         this.height = height;
         setBounds(x, y, width, height);
+        dx = 0;
+        dy = 0;
     }
 
     public Sprite(Rectangle r) {
         super(r);
+        dx = 0;
+        dy = 0;
     }
 
 
@@ -49,7 +53,7 @@ public abstract class Sprite extends Rectangle {
         this.angle = angle;
     }
 
-    public int getDx() {
+    public double getDx() {
         return dx;
     }
 
@@ -57,7 +61,7 @@ public abstract class Sprite extends Rectangle {
         this.dx = dx;
     }
 
-    public int getDy() {
+    public double getDy() {
         return dy;
     }
 
