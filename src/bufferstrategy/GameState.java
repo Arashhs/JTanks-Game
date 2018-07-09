@@ -27,7 +27,7 @@ public class GameState {
 	public static Level level;
 	public static Tank tank;
 	public static int sX = 0 , sY = 0;
-	public Enemies enemies;
+	public static Enemies enemies;
 	
 	public static boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
@@ -43,7 +43,6 @@ public class GameState {
 	private int fireConst;
 
 	public GameState() {
-		level = new Level();
 		tank = new Tank();
 		gameOver = false;
 		//
@@ -61,7 +60,8 @@ public class GameState {
 		gunState = 0;
 		fireConst = 0;
 		enemies = new Enemies(1);
-	}
+        level = new Level();
+    }
 	
 	/**
 	 * The method which updates the game state.
@@ -166,16 +166,17 @@ public class GameState {
 			mouseX = e.getX();
 			mouseY = e.getY();
 			mousePress = true;
-			if(SwingUtilities.isRightMouseButton(e))
+            double teta = Math.atan2(GameState.getTargetPoint().y + GameState.sY - tank.locY,  GameState.getTargetPoint().x + GameState.sX - tank.locX);
+            if(SwingUtilities.isRightMouseButton(e))
 			    gunState = ++gunState%2 ;
 			if(SwingUtilities.isLeftMouseButton(e)){
 				BulletSprite bullet = null;
 				switch (gunState){
 					case 0:
-						bullet = new Missile(tank);
+						bullet = new Missile(new Rectangle(tank.locX , tank.locY , tank.width , tank.height) , teta);
 						break;
 					case 1:
-						bullet = new LightBullet(tank);
+						bullet = new LightBullet(new Rectangle(tank.locX , tank.locY , tank.width , tank.height) , teta);
 						break;
 				}
 				tank.getBulletSprites().add(bullet);
@@ -256,7 +257,8 @@ public class GameState {
 		fireConst++;
 		BulletSprite bullet = null;
 		if(mousePress && fireConst % 8 == 0 && gunState == 1) {
-			bullet = new LightBullet(tank);
+		    double tetae = Math.atan2(GameState.getTargetPoint().y + GameState.sY - tank.locY,  GameState.getTargetPoint().x + GameState.sX - tank.locX);
+            bullet = new LightBullet(new Rectangle(tank.locX , tank.locY , tank.width , tank.height),tetae);;
 			tank.getBulletSprites().add(bullet);
 			bullet.shoot();
 		}

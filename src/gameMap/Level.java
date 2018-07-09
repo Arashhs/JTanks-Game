@@ -86,10 +86,15 @@ public class Level {
                     newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(tile));
                 }
                 // check if the char represents a sprite
-          /*      else if (ch == 'o') {
-                    addSprite(newMap, coinSprite, x, y);
+                else if (ch == 'O') {
+                    GameState.enemies.addEnemy('O' , x , y);
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
                 }
                 else if (ch == '!') {
+                    GameState.enemies.addEnemy('I' , x , y);
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                }
+             /*   else if (ch == '!') {
                     addSprite(newMap, musicSprite, x, y);
                 }
                 else if (ch == '*') {
@@ -101,6 +106,7 @@ public class Level {
                 else if (ch == '2') {
                     addSprite(newMap, flySprite, x, y);
                 }  */
+
             }
         }
         // add the player to the map

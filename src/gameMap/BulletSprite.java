@@ -11,19 +11,20 @@ public abstract class BulletSprite extends Sprite {
 
     private boolean collided, shooting;
 
-    public BulletSprite(Tank source , int x , int y , int width , int height , BufferedImage image) {
+    public BulletSprite( int x , int y , int width , int height , BufferedImage image , double teta) {
         super(x , y , width , height );
         this.image = image;
         collided = false;
         shooting = false;
         dx = 0;
         dy = 0;
+        angle = teta;
     }
 
     public void shoot(){
         shooting = true;
         state = 0;
-        angle = Math.atan2(GameState.getTargetPoint().y + GameState.sY - y,  GameState.getTargetPoint().x + GameState.sX - x);
+     //   angle = Math.atan2(GameState.getTargetPoint().y + GameState.sY - y,  GameState.getTargetPoint().x + GameState.sX - x);
         dx = (bulletSpeed) * Math.cos(angle);
         dy = (bulletSpeed) * Math.sin(angle);
     }

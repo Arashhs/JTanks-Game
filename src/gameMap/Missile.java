@@ -7,8 +7,8 @@ import java.awt.geom.AffineTransform;
 
 public class Missile extends BulletSprite {
 
-    public Missile(Tank source) {
-        super(source , (int) (source.locX + 33) , (int)(source.locY + 33) , 23 , 9 , Tile.missle);
+    public Missile(Rectangle source , double teta) {
+        super((int) (source.x + 33) , (int)(source.y + 33) , 23 , 9 , Tile.missle , teta);
         bulletSpeed = 10;
         damage = 100;
     }
