@@ -15,9 +15,11 @@ public class Tile {
 
     public static BufferedImage tileSet_soil;
     public static BufferedImage base;
+    public static BufferedImage base2;
     public static BufferedImage turret1;
     public static BufferedImage turret2;
     public static BufferedImage missle;
+    public static BufferedImage lightBullet;
 
     public static CopyOnWriteArrayList<BufferedImage> tileImages;
 
@@ -26,9 +28,11 @@ public class Tile {
         try {
             Tile.tileSet_soil = ImageIO.read(new File("res\\assets\\soil.png"));
             base = ImageIO.read(new File("res\\assets\\tank.png"));
+            base2 = ImageIO.read(new File("res\\assets\\tank2.png"));
             turret1 = ImageIO.read(new File("res\\assets\\tankGun01.png"));
             turret2 = ImageIO.read(new File("res\\assets\\tankGun2.png"));
             missle = ImageIO.read(new File("res\\assets\\HeavyBullet.png"));
+            lightBullet = ImageIO.read(new File("res\\assets\\LightBullet.png"));
             loadTileImages();
         } catch (IOException e) {
             e.printStackTrace();
