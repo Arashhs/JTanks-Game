@@ -34,6 +34,15 @@ public class Enemies{
         else if(type == '1'){
             movingSprites.add(new MovingEnemy2(p.x , p.y , 0 , 5 , Tile.movingEnemy2_1));
         }
+        else if(type == '#'){
+            movingSprites.add(new Mine(p.x , p.y));
+        }
+        else if(type == '$'){
+            movingSprites.add(new BigRedGun(p.x , p.y , Tile.bigRedGun));
+        }
+        else if(type == '%'){
+            movingSprites.add(new BigRedGun(p.x , p.y , Tile.blueGun));
+        }
     }
 
     public void tick(){

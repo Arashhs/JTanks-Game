@@ -46,14 +46,15 @@ public abstract class MovingSprite extends Sprite {
     }
 
     public void tick() {
-        update();
-        if (!isColliding(new Rectangle((int)(x + dx ) ,(int) (y + dy ), width, height))) {
-            x += dx;
-            y += dy;
-        }
-        else {
-            dx = -dx;
-            dy = -dy;
+        if(Math.abs(x - GameState.tank.locX) < 800 && Math.abs(y - GameState.tank.locY) < 800) {
+            update();
+            if (!isColliding(new Rectangle((int) (x + dx), (int) (y + dy), width, height))) {
+                x += dx;
+                y += dy;
+            } else {
+                dx = -dx;
+                dy = -dy;
+            }
         }
     }
 

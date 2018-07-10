@@ -9,18 +9,18 @@
 # 1 Bad Guy 1 (grub)
 # 2 Bad Guy 2 (fly)
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+B                          BBB   !       !                    1          JJ       JJ      BBBB         JJJJJJ
 B                          BBB                                           JJ       JJ      BBBB         JJJJJJ
-B                       1  BBB                                           JJ       JJ      BBBB         JJJJJJ
-B  1 CCCCCCCCCCC           BBB               BBBBBBBBBBBBBBB             JJ       JJ      BBBB         JJJJJJ
-B  1 C         C        1  BBB               BB     BBBBBBBBB            JJ       JJ      BBBBJDDDDDDDJJJJJJJJJJJJJJ
+B  1 CCCCCCCCCCC           BBB               BBBBBBBBBBBBBBB             JJ   $   JJ   $  BBBB         JJJJJJ
+B  1 C         C           BBB               BB     BBBBBBBBB            JJ       JJ      BBBBJDDDDDDDJJJJJJJJJJJJJJ
 B    C         C           BBB              BBBDDDDDBBBBBBBBBBBBBBBB     JJJJJJJJJJJJJJJJJBBBB             JJJJJJ
 B    C         CCCCCCCC    BBB             BB                DD   BB                     BBBB              JJJJJJ
-B    C               CC    BBBJJJJJJJJ     BB                DD   BB                     BBBB              JJJJJJ
+B    C               CC    BBBJJJJJJJJ # # BB                DD   BB                     BBBB              JJJJJJ
 B    C                BDDDBBBB                  CCCCCCCCCC   DD   BB                     BBBB              JJJJJJ
 B    C                B   BBBB                  CMMMMMMMMC   BBBBBBB                     BBBB              JJJJJJ                         B
 B    C                B   BBBB                  CMMMMMMMMC       BBB                                       JJJJJJ                         B
-B    CCCCCCC    CCCCCCBBBBBBBBJJJJJJJJJJJJ      CCCCCCCCCC       BBB                                       JJJJJJ                         B
-B     J                 BBB             JJ      C       C        BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB            JJJJJJJJJJJJ                   B
+B    CCCCCCC # # CCCCCCBBBBBBBBJJJJJJJJJJJ      CCCCCCCCCC       BBB                                       JJJJJJ                         B
+B     J                 BBB      1      JJ      C       C        BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB # # # # #  JJJJJJJJJJJJ                   B
 B     J               O BBB              J       C     C       BBBBBBCCCCCCCCC                             DD     BBBBB      L        L   B
 B     J                 BBB              J                    BBBBBBBCCMMMMCCC                             DD     BBBBB                  BB
 B     J                 BBB                                   BBBBBBBBBCCMMC                               DD     BBBBB                  BB

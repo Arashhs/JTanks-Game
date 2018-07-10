@@ -32,7 +32,6 @@ public class Tank extends MovingSprite {
 
     public void tick() {
         if(hp <= 0){
-
         }
         {
             if (GameState.keyUP) {
@@ -84,8 +83,10 @@ public class Tank extends MovingSprite {
 
     public boolean isColliding(Rectangle rectangle) {
         for(MovingSprite ms : GameState.enemies.getMovingSprites()){
-            if(rectangle.intersects(ms))
+            if(rectangle.intersects(ms)) {
+                ms.collideWithTank = true;
                 return true;
+            }
         }
         for (int i = Math.max((int) ((x + GameState.sX) / Tile.tileSize) - 1, 0); i < Math.min((int) ((x + GameState.sX + width) / Tile.tileSize) + 2, GameState.level.blocks.length); i++) {
             for (int j = Math.max((int) ((y + GameState.sY) / Tile.tileSize) - 1, 0); j < Math.min((int) ((y + GameState.sY + height) / Tile.tileSize) + 2, GameState.level.blocks[i].length); j++) {
