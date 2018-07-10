@@ -35,6 +35,12 @@ public class BigEnemy extends MovingSprite {
             missile.shoot();
             bullets.add(missile);
         }
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i).isCollided()) {
+                bullets.remove(i);
+                continue;
+            }
+        }
     }
 
     public void render(Graphics2D g , GameState state){

@@ -13,6 +13,8 @@ public abstract class MovingSprite extends Sprite {
     protected double turretAngle;
     protected int id;
 
+    protected boolean collideWithTank;
+
     public MovingSprite(int x, int y, int width, int height, BufferedImage baseImage, BufferedImage turretImage , int id) {
         super(x, y, width, height);
         this.baseImage = baseImage;
@@ -20,12 +22,15 @@ public abstract class MovingSprite extends Sprite {
         turretAngle = 0;
         image = turretImage;
         this.id = id;
+        collideWithTank = false;
     }
 
     public boolean isColliding(Rectangle rectangle) {
         Rectangle tank = new Rectangle(GameState.tank.locX , GameState.tank.locY , GameState.tank.width , GameState.tank.height);
-        if(tank.intersects(rectangle))
+        if(tank.intersects(rectangle)) {
+            collideWithTank = true;
             return true;
+        }
         for(MovingSprite ms : GameState.enemies.getMovingSprites()){
             if(ms.getBounds2D().intersects(rectangle.getBounds2D()) && ms.id != this.id)
                 return true;
@@ -41,6 +46,7 @@ public abstract class MovingSprite extends Sprite {
     }
 
     public void tick() {
+        update();
         if (!isColliding(new Rectangle((int)(x + dx ) ,(int) (y + dy ), width, height))) {
             x += dx;
             y += dy;
@@ -53,8 +59,8 @@ public abstract class MovingSprite extends Sprite {
 
     public void render(Graphics2D g2d, GameState state) {
          turretAngle = Math.atan2(state.tank.locY - y - 36  ,  state.tank.locX - x - 30 ) ;
-        g2d.drawImage(baseImage, x - state.sX, y - state.sY, null);
-          drawRotated(turretAngle , x + 30 - GameState.sX , y + 33 - GameState.sY , g2d);
+         g2d.drawImage(baseImage, x - state.sX, y - state.sY, null);
+         drawRotated(turretAngle , x + 30 - GameState.sX , y + 33 - GameState.sY , g2d);
       //  g2d.drawImage(image, x + 30 - state.sX, y + 33 - state.sY, null);
     }
 
@@ -67,5 +73,23 @@ public abstract class MovingSprite extends Sprite {
         g.setTransform(backupAt);
     }
 
+    public void bulletHit(BulletSprite bullet){
+        hp -= bullet.damage;
+        if(hp <= 0)
+            state = STATE_Dead;
 
+    }
+
+    public void update(){
+        if (state == STATE_Dead)
+            GameState.enemies.getMovingSprites().remove(this);
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
 }

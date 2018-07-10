@@ -179,6 +179,7 @@ public class GameState {
 						bullet = new LightBullet(new Rectangle(tank.locX , tank.locY , tank.width , tank.height) , teta);
 						break;
 				}
+				bullet.setSource(-1);
 				tank.getBulletSprites().add(bullet);
 				bullet.shoot();
 			}
@@ -259,10 +260,18 @@ public class GameState {
 		if(mousePress && fireConst % 8 == 0 && gunState == 1) {
 		    double tetae = Math.atan2(GameState.getTargetPoint().y + GameState.sY - tank.locY,  GameState.getTargetPoint().x + GameState.sX - tank.locX);
             bullet = new LightBullet(new Rectangle(tank.locX , tank.locY , tank.width , tank.height),tetae);;
+            bullet.setSource(-1);
 			tank.getBulletSprites().add(bullet);
 			bullet.shoot();
 		}
 	}
 
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
+	}
 }
 

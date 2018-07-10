@@ -4,6 +4,7 @@ import bufferstrategy.GameState;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Enemies{
     public static final int EASY_Difficulty = 0;
@@ -12,10 +13,10 @@ public class Enemies{
 
     private static int difficulty;
 
-    private ArrayList<MovingSprite> movingSprites;
+    private CopyOnWriteArrayList<MovingSprite> movingSprites;
 
     public Enemies(int difficulty){
-        movingSprites = new ArrayList<>();
+        movingSprites = new CopyOnWriteArrayList<>();
     }
 
     public Point position(int tileWidth , int tileHeight){
@@ -29,6 +30,9 @@ public class Enemies{
         }
         else if(type == 'I'){
             movingSprites.add(new BigEnemy(p.x , p.y , 0 , 5 , Tile.bigEnemyBase2));
+        }
+        else if(type == '1'){
+            movingSprites.add(new MovingEnemy2(p.x , p.y , 0 , 5 , Tile.movingEnemy2_1));
         }
     }
 
@@ -46,7 +50,7 @@ public class Enemies{
 
     }
 
-    public ArrayList<MovingSprite> getMovingSprites() {
+    public CopyOnWriteArrayList<MovingSprite> getMovingSprites() {
         return movingSprites;
     }
 }

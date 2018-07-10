@@ -112,7 +112,7 @@ public class GameFrame extends JFrame {
 
 		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-		state.level.tick();
+		state.level.tick(state);
 		state.tank.tick();
 		state.enemies.tick();
 

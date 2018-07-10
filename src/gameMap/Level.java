@@ -30,8 +30,9 @@ public class Level {
         }
     }
 
-    public void tick(){
-
+    public void tick(GameState state){
+        if(GameState.tank.getHp() <= 0)
+            state.setGameOver(true);
     }
 
 
@@ -92,6 +93,10 @@ public class Level {
                 }
                 else if (ch == '!') {
                     GameState.enemies.addEnemy('I' , x , y);
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                }
+                else if (ch == '1') {
+                    GameState.enemies.addEnemy('1' , x , y);
                     newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
                 }
              /*   else if (ch == '!') {

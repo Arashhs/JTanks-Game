@@ -10,7 +10,7 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Tank extends Rectangle {
+public class Tank extends MovingSprite {
     public int locX, locY, tankHeight, tankWidth, diam;
 
     private BufferedImage image;
@@ -18,6 +18,7 @@ public class Tank extends Rectangle {
     private ArrayList<BulletSprite> bulletSprites;
 
     public Tank() {
+        super(500 , 300 , 100 , 100 , Tile.base , Tile.base2 , -1);
         locX = 500;
         locY = 300;
         tankHeight = 100;
@@ -26,9 +27,13 @@ public class Tank extends Rectangle {
         setBounds(locX, locY, tankHeight, tankWidth);
         bulletSprites = new ArrayList<BulletSprite>();
         image = Tile.base;
+        hp = 1000;
     }
 
     public void tick() {
+        if(hp <= 0){
+
+        }
         {
             if (GameState.keyUP) {
                 if (!isColliding(new Rectangle(x + GameState.sX, y - 7 + GameState.sY, tankWidth, tankHeight))) {
@@ -125,4 +130,6 @@ public class Tank extends Rectangle {
     public ArrayList<BulletSprite> getBulletSprites() {
         return bulletSprites;
     }
+
+
 }
