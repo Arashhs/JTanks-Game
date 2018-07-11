@@ -83,4 +83,14 @@ public abstract class BulletSprite extends Sprite {
     public void setSource(int source) {
         this.source = source;
     }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+
 }

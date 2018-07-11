@@ -82,8 +82,10 @@ public abstract class MovingSprite extends Sprite {
     }
 
     public void update(){
-        if (state == STATE_Dead)
+        if (state == STATE_Dead) {
+            GameState.lastEvent = "Enemy destroyed!";
             GameState.enemies.getMovingSprites().remove(this);
+        }
     }
 
     public int getHp() {

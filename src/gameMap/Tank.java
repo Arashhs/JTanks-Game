@@ -13,12 +13,19 @@ import java.util.ArrayList;
 public class Tank extends MovingSprite {
     public int locX, locY, tankHeight, tankWidth, diam;
 
+    public static int tankMissileDamage, tankBulletDamage;
+
     private BufferedImage image;
 
     private ArrayList<BulletSprite> bulletSprites;
 
+    private int numOfBullet, numOfMissiles;
+
+    private static BufferedImage turret1;
+    private static BufferedImage turret2;
+
     public Tank() {
-        super(500 , 300 , 100 , 100 , Tile.base , Tile.base2 , -1);
+        super(500, 300, 100, 100, Tile.base, Tile.base2, -1);
         locX = 500;
         locY = 300;
         tankHeight = 100;
@@ -28,10 +35,15 @@ public class Tank extends MovingSprite {
         bulletSprites = new ArrayList<BulletSprite>();
         image = Tile.base;
         hp = 1000;
+        tankMissileDamage = 100;
+        tankBulletDamage = 40;
+        baseImage = Tile.base;
+        turret1 = Tile.turret1;
+        turret2 = Tile.turret2;
     }
 
     public void tick() {
-        if(hp <= 0){
+        if (hp <= 0) {
         }
         {
             if (GameState.keyUP) {
@@ -82,8 +94,8 @@ public class Tank extends MovingSprite {
     } */
 
     public boolean isColliding(Rectangle rectangle) {
-        for(MovingSprite ms : GameState.enemies.getMovingSprites()){
-            if(rectangle.intersects(ms)) {
+        for (MovingSprite ms : GameState.enemies.getMovingSprites()) {
+            if (rectangle.intersects(ms)) {
                 ms.collideWithTank = true;
                 return true;
             }
@@ -113,9 +125,9 @@ public class Tank extends MovingSprite {
         }
         g2d.setTransform(at);
         if (state.getGunState() == 0) {
-            g2d.drawImage(Tile.turret1, state.getCenter().x, state.getCenter().y, null);
+            g2d.drawImage(turret1, state.getCenter().x, state.getCenter().y, null);
         } else {
-            g2d.drawImage(Tile.turret2, state.getCenter().x, state.getCenter().y, null);
+            g2d.drawImage(turret2, state.getCenter().x, state.getCenter().y, null);
         }
         g2d.setTransform(backupAt);
         state.checkFireConstant();
@@ -132,5 +144,23 @@ public class Tank extends MovingSprite {
         return bulletSprites;
     }
 
+    public static BufferedImage getTurret1() {
+        return turret1;
+    }
 
+    public static void setTurret1(BufferedImage turret1) {
+        Tank.turret1 = turret1;
+    }
+
+    public static BufferedImage getTurret2() {
+        return turret2;
+    }
+
+    public static void setTurret2(BufferedImage turret2) {
+        Tank.turret2 = turret2;
+    }
 }
+
+
+
+
