@@ -176,6 +176,8 @@ public class GameFrame extends JFrame {
 		g2d.drawString(userGuide, 10, GAME_HEIGHT - 10);
 		g2d.drawString("" + GameState.tank.getNumOfBullet() , 60 , 80);
 		g2d.drawString("" + GameState.tank.getNumOfMissiles() , 170 , 80);
+		g2d.setFont(g2d.getFont().deriveFont(25.0f));
+		g2d.drawString("Tank HP: " + GameState.tank.getHp() , 10 , 113);
 
 		g2d.drawImage(Tile.numberOfLightBullets , 10,25,null);
 		g2d.drawImage(Tile.numberOfHeavyBullets , 120,36,null);
