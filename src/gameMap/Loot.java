@@ -71,7 +71,5 @@ public class Loot {
             p = new WeaponUpgrader(xLocation , yLocation);
             GameState.loots.addManual(p);
         }
-        System.out.println("Type: " + type);
-        System.out.println("Val: " + val);
     }
 }

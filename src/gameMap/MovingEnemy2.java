@@ -1,6 +1,7 @@
 package gameMap;
 
 import bufferstrategy.GameState;
+import bufferstrategy.Main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,7 +18,7 @@ public class MovingEnemy2 extends MovingSprite {
         state = STATE_Alive;
         this.dx = dx;
         this.dy = dy;
-        hp = 120;
+        hp = 120 * Main.gameDifficulty;
         baseImage = image;
         turretImage = null;
         turretAngle = 0;

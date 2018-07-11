@@ -45,11 +45,14 @@ public class Enemies{
         }
     }
 
-    public void tick(){
+    public void tick(GameState gState){
 
         for(MovingSprite movingSprite : movingSprites){
             movingSprite.tick();
         }
+        if(movingSprites.size() < 1)
+            gState.setGameOver(2);
+
     }
 
     public void render(Graphics2D g2d , GameState state){

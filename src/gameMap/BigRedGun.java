@@ -1,6 +1,7 @@
 package gameMap;
 
 import bufferstrategy.GameState;
+import bufferstrategy.Main;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -15,7 +16,7 @@ public class BigRedGun extends MovingSprite {
         super(x, y , 100 , 100 , Tile.bigRedGun , null , GameState.enemies.getMovingSprites().size());
         state = STATE_Alive;
         dx = dy = 0;
-        hp = 600;
+        hp = 600 * Main.gameDifficulty;
         baseImage = image = im;
         turretAngle = 0;
         diam = 14;

@@ -2,6 +2,7 @@ package gameMap;
 
 import bufferstrategy.GameFrame;
 import bufferstrategy.GameState;
+import bufferstrategy.Main;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -24,15 +25,23 @@ public class Level {
     blocks[0][0].setCollidable(true);
     blocks[5][5].setCollidable(true); */
         try {
-            blocks = loadMap("res\\maps\\map.txt");
+            if(Main.gameDifficulty == 1)
+                  blocks = loadMap("res\\maps\\map1_easy.txt");
+            else if(Main.gameDifficulty == 2)
+                blocks = loadMap("res\\maps\\map1_medium.txt");
+            else if(Main.gameDifficulty == 3)
+                blocks = loadMap("res\\maps\\map1_hard.txt");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void tick(GameState state){
-        if(GameState.tank.getHp() <= 0)
-            state.setGameOver(true);
+        if(GameState.tank.getHp() <= 0) {
+            GameState.tank.setHp(0);
+            state.setGameOver(1);
+        }
     }
 
 

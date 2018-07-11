@@ -45,28 +45,4 @@ public abstract class PickUp extends Sprite {
         //  g2d.drawImage(image, x + 30 - state.sX, y + 33 - state.sY, null);
     }
 
-  /*  public PickUp deathLoot(int xLocation , int yLocation){
-        int type = (new Random()).nextInt(4);
-        int val = (new Random()).nextInt(100);
-        PickUp p = null;
-        if(type == 0 && val < PickUp.AMMO_RARITY){
-            p = new CannonAmmo(xLocation , yLocation);
-            GameState.loots.addManual(p);
-        }
-
-        else if(type == 1 && val < PickUp.AMMO_RARITY){
-            p = new MachineGunAmmo(xLocation , yLocation);
-            GameState.loots.addManual(p);
-        }
-        else if(type == 2 && val < PickUp.REPAIR_KIT_RARITY){
-            p = new RepairKit(xLocation , yLocation);
-            GameState.loots.addManual(p);
-        }
-        else if(type == 3 && val < PickUp.UPGRADER_RARITY){
-            p = new WeaponUpgrader(xLocation , yLocation);
-            GameState.loots.addManual(p);
-        }
-        return p;
-    } */
-
 }
