@@ -2,10 +2,14 @@ package bufferstrategy;
 
 import gameMap.Tile;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class StartMenu extends JFrame implements ActionListener, Runnable {
     private static final long serialVersionUID = 1L;
@@ -16,15 +20,19 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
     JButton multiplayer = new JButton("play multiplayer");
     JButton exit = new JButton("exit");
     JButton mainMenu = new JButton("main menu");
+    JButton mainMenu2 = new JButton("main menu");
     JButton easyMode = new JButton("Easy");
     JButton mediumMode = new JButton("Medium");
     JButton hardMode = new JButton("Hard");
+    JButton howToPlay = new JButton("How to play");
 
     CardLayout layout = new CardLayout();
 
     JPanel panel = new JPanel();
     JPanel game = new JPanel();
     JPanel menu = new JPanel();
+    JPanel htp = new JPanel();
+
 
     public StartMenu(int width, int height) {
         this.width = width;
@@ -49,31 +57,45 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
         multiplayer.addActionListener(this);
         exit.addActionListener(this);
         mainMenu.addActionListener(this);
+        mainMenu2.addActionListener(this);
         easyMode.addActionListener(this);
         mediumMode.addActionListener(this);
         hardMode.addActionListener(this);
+        howToPlay.addActionListener(this);
 
         //menu buttons
         menu.add(singleplayer);
         menu.add(multiplayer);
+        menu.add(howToPlay);
         menu.add(exit);
+        menu.add(new JLabel(new ImageIcon("res\\assets\\startMenu.png")));
 
         //game buttons
         game.add(mainMenu);
         game.add(easyMode);
         game.add(mediumMode);
         game.add(hardMode);
+        game.add(new JLabel(new ImageIcon("res\\assets\\startMenu.png")));
+
+
+        //How to play Buttons
+        htp.add(mainMenu2);
+        htp.add(new JLabel(new ImageIcon("res\\assets\\howToPlay.png")));
 
         //background colors
-        game.setBackground(new Color(200, 188 , 171));
-        menu.setBackground(new Color(192, 212 , 170));
+        game.setBackground(new Color(69, 89 , 188));
+        menu.setBackground(new Color(69, 89 , 188));
+        htp.setBackground(new Color(69,89,188));
+
 
         //adding children to parent Panel
         panel.add(menu,"Menu");
         panel.add(game,"Game");
+        panel.add(htp , "htp");
 
         add(panel);
         layout.show(panel,"Menu");
+
 
     }
 
@@ -89,7 +111,7 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
         } else if (source == multiplayer){
             Main.gameMode = 1;
             layout.show(panel, "Game");
-        } else if (source == mainMenu){
+        } else if (source == mainMenu || source == mainMenu2){
             layout.show(panel, "Menu");
         } else if (source == easyMode){
             Main.gameDifficulty = 1;
@@ -98,14 +120,17 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
 
         } else if (source == hardMode){
             Main.gameDifficulty = 3;
+        } else if (source == howToPlay){
+            layout.show(panel, "htp");
         }
 
     }
 
-    @Override
+
+
+        @Override
     public void run() {
-        StartMenu sc = new StartMenu(1280, 720);
-        sc.setVisible(true);
+        this.setVisible(true);
         while (Main.gameDifficulty == 0){
             try {
                 Thread.sleep(100);
@@ -113,5 +138,6 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
                 e.printStackTrace();
             }
         }
+        dispose();
     }
 }
