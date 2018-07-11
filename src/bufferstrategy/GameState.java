@@ -28,6 +28,8 @@ public class GameState {
 	public static Tank tank;
 	public static int sX = 0 , sY = 0;
 	public static Enemies enemies;
+	public static Loot loots;
+	public static String lastEvent;
 	
 	public static boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
 	private boolean mousePress;
@@ -60,7 +62,10 @@ public class GameState {
 		gunState = 0;
 		fireConst = 0;
 		enemies = new Enemies(1);
+		loots = new Loot();
         level = new Level();
+
+        lastEvent = "";
     }
 	
 	/**
@@ -173,15 +178,27 @@ public class GameState {
 				BulletSprite bullet = null;
 				switch (gunState){
 					case 0:
-						bullet = new Missile(new Rectangle(tank.locX , tank.locY , tank.width , tank.height) , teta);
+						if(tank.getNumOfMissiles() > 0) {
+							bullet = new Missile(new Rectangle(tank.locX, tank.locY, tank.width, tank.height), teta);
+							bullet.setDamage(Tank.tankMissileDamage);
+							tank.decreaseMissile();
+							bullet.setSource(-1);
+							tank.getBulletSprites().add(bullet);
+							bullet.shoot();
+						}
 						break;
 					case 1:
-						bullet = new LightBullet(new Rectangle(tank.locX , tank.locY , tank.width , tank.height) , teta);
+						if(tank.getNumOfBullet() > 0) {
+							bullet = new LightBullet(new Rectangle(tank.locX, tank.locY, tank.width, tank.height), teta);
+							bullet.setDamage(Tank.tankBulletDamage);
+							tank.decreaseLightBullet();
+							bullet.setSource(-1);
+							tank.getBulletSprites().add(bullet);
+							bullet.shoot();
+						}
 						break;
+
 				}
-				bullet.setSource(-1);
-				tank.getBulletSprites().add(bullet);
-				bullet.shoot();
 			}
 		}
 
@@ -259,10 +276,15 @@ public class GameState {
 		BulletSprite bullet = null;
 		if(mousePress && fireConst % 8 == 0 && gunState == 1) {
 		    double tetae = Math.atan2(GameState.getTargetPoint().y + GameState.sY - tank.locY,  GameState.getTargetPoint().x + GameState.sX - tank.locX);
-            bullet = new LightBullet(new Rectangle(tank.locX , tank.locY , tank.width , tank.height),tetae);;
-            bullet.setSource(-1);
-			tank.getBulletSprites().add(bullet);
-			bullet.shoot();
+		    if(tank.getNumOfBullet() > 0) {
+				bullet = new LightBullet(new Rectangle(tank.locX, tank.locY, tank.width, tank.height), tetae);
+				bullet.setSource(-1);
+				tank.getBulletSprites().add(bullet);
+				bullet.setDamage(Tank.tankBulletDamage);
+				bullet.shoot();
+				tank.decreaseLightBullet();
+			}
+
 		}
 	}
 
@@ -273,5 +295,9 @@ public class GameState {
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
 	}
+
+
+
+
 }
 

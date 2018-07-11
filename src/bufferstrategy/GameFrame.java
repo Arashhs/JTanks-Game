@@ -1,6 +1,8 @@
 /*** In The Name of Allah ***/
 package bufferstrategy;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+import gameMap.Tile;
 import javafx.scene.transform.Rotate;
 
 import java.awt.Color;
@@ -119,6 +121,7 @@ public class GameFrame extends JFrame {
 		state.level.render(g2d , state);
 		state.tank.render(g2d , state);
 		state.enemies.render(g2d , state);
+		state.loots.render(g2d , state);
 
 	/*	g2d.setColor(Color.BLACK);
 		g2d.fillOval(state.locX, state.locY, state.diam, state.diam);
@@ -165,11 +168,17 @@ public class GameFrame extends JFrame {
 		}
 		lastRender = currentRender;
 		// Print user guide
-		String userGuide
+/*		String userGuide
 				= "Use the MOUSE or ARROW KEYS to move the BALL. "
-				+ "Press ESCAPE to end the game.";
+				+ "Press ESCAPE to end the game."; */
+		String userGuide = "Last Event: " + GameState.lastEvent +  " Number of remaining Enemies: " + GameState.enemies.getMovingSprites().size();;
 		g2d.setFont(g2d.getFont().deriveFont(18.0f));
 		g2d.drawString(userGuide, 10, GAME_HEIGHT - 10);
+		g2d.drawString("" + GameState.tank.getNumOfBullet() , 60 , 80);
+		g2d.drawString("" + GameState.tank.getNumOfMissiles() , 170 , 80);
+
+		g2d.drawImage(Tile.numberOfLightBullets , 10,25,null);
+		g2d.drawImage(Tile.numberOfHeavyBullets , 120,36,null);
 		// Draw GAME OVER
 		if (state.gameOver) {
 			String str = "GAME OVER";
