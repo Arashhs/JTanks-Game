@@ -15,6 +15,8 @@ public class Tank extends MovingSprite {
 
     public static int tankMissileDamage, tankBulletDamage;
 
+    public static final int MAX_HP = 1200;
+
     private BufferedImage image;
 
     private ArrayList<BulletSprite> bulletSprites;
@@ -34,12 +36,14 @@ public class Tank extends MovingSprite {
         setBounds(locX, locY, tankHeight, tankWidth);
         bulletSprites = new ArrayList<BulletSprite>();
         image = Tile.base;
-        hp = 1000;
+        hp = 1200;
         tankMissileDamage = 100;
         tankBulletDamage = 40;
         baseImage = Tile.base;
         turret1 = Tile.turret1;
         turret2 = Tile.turret2;
+        numOfBullet = 300;
+        numOfMissiles = 50;
     }
 
     public void tick() {
@@ -158,6 +162,38 @@ public class Tank extends MovingSprite {
 
     public static void setTurret2(BufferedImage turret2) {
         Tank.turret2 = turret2;
+    }
+
+    public int getNumOfBullet() {
+        return numOfBullet;
+    }
+
+    public void setNumOfBullet(int numOfBullet) {
+        this.numOfBullet = numOfBullet;
+    }
+
+    public int getNumOfMissiles() {
+        return numOfMissiles;
+    }
+
+    public void setNumOfMissiles(int numOfMissiles) {
+        this.numOfMissiles = numOfMissiles;
+    }
+
+    public void decreaseLightBullet(){
+        numOfBullet--;
+    }
+
+    public void decreaseMissile(){
+        numOfMissiles--;
+    }
+
+    public void increaseMissile(){
+        numOfMissiles += 20;
+    }
+
+    public void increaseMachinGunAmmo(){
+        numOfBullet += 50;
     }
 }
 

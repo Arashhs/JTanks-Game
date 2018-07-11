@@ -15,6 +15,8 @@ public abstract class MovingSprite extends Sprite {
 
     protected boolean collideWithTank;
 
+    private PickUp deathLoot;
+
     public MovingSprite(int x, int y, int width, int height, BufferedImage baseImage, BufferedImage turretImage , int id) {
         super(x, y, width, height);
         this.baseImage = baseImage;
@@ -23,6 +25,7 @@ public abstract class MovingSprite extends Sprite {
         image = turretImage;
         this.id = id;
         collideWithTank = false;
+        deathLoot = null;
     }
 
     public boolean isColliding(Rectangle rectangle) {
@@ -84,6 +87,7 @@ public abstract class MovingSprite extends Sprite {
     public void update(){
         if (state == STATE_Dead) {
             GameState.lastEvent = "Enemy destroyed!";
+            GameState.loots.deathLoot(x , y);
             GameState.enemies.getMovingSprites().remove(this);
         }
     }

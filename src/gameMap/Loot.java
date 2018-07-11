@@ -4,6 +4,7 @@ import bufferstrategy.GameState;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Loot {
@@ -23,6 +24,19 @@ public class Loot {
         if (type == '^') {
             loots.add(new WeaponUpgrader(p.x, p.y));
         }
+        else if (type == '&') {
+            loots.add(new RepairKit(p.x, p.y));
+        }
+        else if (type == '*') {
+            loots.add(new CannonAmmo(p.x, p.y));
+        }
+        else if (type == '(') {
+            loots.add(new MachineGunAmmo(p.x, p.y));
+        }
+    }
+
+    public void addManual(PickUp pickUp){
+        loots.add(pickUp);
     }
 
 
@@ -34,5 +48,30 @@ public class Loot {
 
     public CopyOnWriteArrayList<PickUp> getLoots() {
         return loots;
+    }
+
+    public void deathLoot(int xLocation , int yLocation){
+        int type = (new Random()).nextInt(4);
+        int val = (new Random()).nextInt(100);
+        PickUp p = null;
+        if(type == 0 && val < PickUp.AMMO_RARITY){
+            p = new CannonAmmo(xLocation , yLocation);
+            GameState.loots.addManual(p);
+        }
+
+        else if(type == 1 && val < PickUp.AMMO_RARITY){
+            p = new MachineGunAmmo(xLocation , yLocation);
+            GameState.loots.addManual(p);
+        }
+        else if(type == 2 && val < PickUp.REPAIR_KIT_RARITY){
+            p = new RepairKit(xLocation , yLocation);
+            GameState.loots.addManual(p);
+        }
+        else if(type == 3 && val < PickUp.UPGRADER_RARITY){
+            p = new WeaponUpgrader(xLocation , yLocation);
+            GameState.loots.addManual(p);
+        }
+        System.out.println("Type: " + type);
+        System.out.println("Val: " + val);
     }
 }

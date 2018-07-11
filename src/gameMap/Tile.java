@@ -34,6 +34,11 @@ public class Tile {
     public static BufferedImage upgrader;
     public static BufferedImage turret1Upgraded;
     public static BufferedImage turret2Upgraded;
+    public static BufferedImage repairKit;
+    public static BufferedImage numberOfHeavyBullets;
+    public static BufferedImage numberOfLightBullets;
+    public static BufferedImage cannonAmmo;
+    public static BufferedImage machineGunAmmo;
 
     public static CopyOnWriteArrayList<BufferedImage> tileImages;
 
@@ -61,6 +66,11 @@ public class Tile {
             upgrader = ImageIO.read(new File("res\\assets\\upgrader.png"));
             turret1Upgraded = ImageIO.read(new File("res\\assets\\turret1Upgraded.png"));
             turret2Upgraded = ImageIO.read(new File("res\\assets\\turret2Upgraded.png"));
+            repairKit = ImageIO.read(new File("res\\assets\\repairKit.png"));
+            numberOfHeavyBullets = ImageIO.read(new File("res\\assets\\NumberOfHeavyBullet2.png"));
+            numberOfLightBullets = ImageIO.read(new File("res\\assets\\NumberOfMachinGun2.png"));
+            cannonAmmo = ImageIO.read(new File("res\\assets\\CannonFood2.png"));
+            machineGunAmmo = ImageIO.read(new File("res\\assets\\MachinGunFood2.png"));
             loadTileImages();
         } catch (IOException e) {
             e.printStackTrace();
