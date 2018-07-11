@@ -12,17 +12,29 @@ import javax.swing.JFrame;
  * @author Seyed Mohammad Ghaffarian
  */
 public class Main {
+	public static int gameMode; //0: Single Player | 1: Multiplayer
+	public static int gameDifficulty = 0; //1: Easy | 2: Medium | 3: Hard
 	
     public static void main(String[] args) {
 		// Initialize the global thread-pool
 		ThreadPool.init();
+		Thread startMenu = new Thread(new StartMenu(1280 , 720));
+		startMenu.run();
 
 		// Show the game menu ...
 		
 		// After the player clicks 'PLAY' ...
 		EventQueue.invokeLater(new Runnable() {
+
 			@Override
 			public void run() {
+				try {
+					startMenu.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println("Difficulty: " + gameDifficulty);
+				System.out.println("Mode: " + gameMode);
 				new Tile(); //load Images
 				GameFrame frame = new GameFrame("JTanks");
 				frame.setLocationRelativeTo(null); // put frame at center of screen
