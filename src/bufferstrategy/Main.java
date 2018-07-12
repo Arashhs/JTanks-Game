@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 public class Main {
 	public static int gameMode; //0: Single Player | 1: Multiplayer
 	public static int gameDifficulty = 0; //1: Easy | 2: Medium | 3: Hard
+	public static int connectionType = -1; //0: Host | 1: Client | -1: Single Player
 	
     public static void main(String[] args) {
 		// Initialize the global thread-pool
@@ -35,6 +36,7 @@ public class Main {
 				}
 				System.out.println("Difficulty: " + gameDifficulty);
 				System.out.println("Mode: " + gameMode);
+				System.out.println("Connection type: " + connectionType);
 				new Tile(); //load Images
 				GameFrame frame = new GameFrame("JTanks");
 				frame.setLocationRelativeTo(null); // put frame at center of screen

@@ -116,7 +116,7 @@ public class GameFrame extends JFrame {
 
 		state.level.tick(state);
 		state.tank.tick();
-		state.enemies.tick();
+		state.enemies.tick(state);
 
 		state.level.render(g2d , state);
 		state.tank.render(g2d , state);
@@ -182,8 +182,15 @@ public class GameFrame extends JFrame {
 		g2d.drawImage(Tile.numberOfLightBullets , 10,25,null);
 		g2d.drawImage(Tile.numberOfHeavyBullets , 120,36,null);
 		// Draw GAME OVER
-		if (state.gameOver) {
+		if (state.gameOver == 1) {
 			String str = "GAME OVER";
+			g2d.setColor(Color.WHITE);
+			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+			int strWidth = g2d.getFontMetrics().stringWidth(str);
+			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+		}
+		if (state.gameOver == 2) {
+			String str = "You win the game!";
 			g2d.setColor(Color.WHITE);
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);

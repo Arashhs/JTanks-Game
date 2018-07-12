@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class GameState {
 	
 /*	public int locX, locY, tankHeight, tankWidth, diam; */
-	public boolean gameOver;
+	public int gameOver; //0: Playing | 1: Game over | 2: Win
 	public static Level level;
 	public static Tank tank;
 	public static int sX = 0 , sY = 0;
@@ -46,7 +46,7 @@ public class GameState {
 
 	public GameState() {
 		tank = new Tank();
-		gameOver = false;
+		gameOver = 0;
 		//
 		keyUP = false;
 		keyDOWN = false;
@@ -134,7 +134,7 @@ public class GameState {
 						keyRIGHT = true;
 						break;
 					case KeyEvent.VK_ESCAPE:
-						gameOver = true;
+						gameOver = 1;
 						break;
 		//		}
 			}
@@ -288,16 +288,12 @@ public class GameState {
 		}
 	}
 
-	public boolean isGameOver() {
-		return gameOver;
-	}
+    public int getGameOver() {
+        return gameOver;
+    }
 
-	public void setGameOver(boolean gameOver) {
-		this.gameOver = gameOver;
-	}
-
-
-
-
+    public void setGameOver(int gameOver) {
+        this.gameOver = gameOver;
+    }
 }
 
