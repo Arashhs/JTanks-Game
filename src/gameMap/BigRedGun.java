@@ -6,13 +6,18 @@ import bufferstrategy.Main;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class BigRedGun extends MovingSprite {
     private int time;
     private ArrayList<BulletSprite> bullets;
 
-    public BigRedGun(int x , int y , BufferedImage im){
+    private boolean isRed;
+
+    public BigRedGun(int x , int y , BufferedImage im , boolean red){
         super(x, y , 100 , 100 , Tile.bigRedGun , null , GameState.enemies.getMovingSprites().size());
         state = STATE_Alive;
         dx = dy = 0;
@@ -22,6 +27,7 @@ public class BigRedGun extends MovingSprite {
         diam = 14;
         time = 0;
         bullets = new ArrayList<>();
+        isRed = red;
     }
 
     public void tick(){
@@ -47,6 +53,19 @@ public class BigRedGun extends MovingSprite {
         drawRotated(turretAngle , x + 30 - GameState.sX , y + 30 - GameState.sY , g);
         for(BulletSprite b: bullets)
             b.move(g);
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        if(isRed)
+            image = baseImage = Tile.bigRedGun;
+        else
+            image = baseImage = Tile.blueGun;
     }
 
 

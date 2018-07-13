@@ -4,6 +4,9 @@ import bufferstrategy.GameState;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Mine extends MovingSprite {
 
@@ -25,5 +28,15 @@ public class Mine extends MovingSprite {
 
     public void render(Graphics2D g2d , GameState state){
         g2d.drawImage(image, x - state.sX, y - state.sY, null);
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        baseImage = image = Tile.mine;
     }
 }

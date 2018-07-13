@@ -5,6 +5,9 @@ import bufferstrategy.Main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class MovingEnemy2 extends MovingSprite {
@@ -58,4 +61,16 @@ public class MovingEnemy2 extends MovingSprite {
     public void render(Graphics2D g2d , GameState state){
         g2d.drawImage(image, x - state.sX, y - state.sY, null);
     }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        baseImage = Tile.movingEnemy2_1;
+        turretImage = null;
+    }
+
 }

@@ -2,8 +2,14 @@ package gameMap;
 
 import bufferstrategy.GameState;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class Missile extends BulletSprite {
 
@@ -13,4 +19,13 @@ public class Missile extends BulletSprite {
         damage = 100;
     }
 
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        image = Tile.missle;
+    }
 }

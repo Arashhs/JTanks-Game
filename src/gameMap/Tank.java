@@ -2,39 +2,48 @@ package gameMap;
 
 import bufferstrategy.GameFrame;
 import bufferstrategy.GameState;
+import bufferstrategy.Main;
+import multiplayer.GameClient;
+import multiplayer.GameServer;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Tank extends MovingSprite {
+public class Tank extends MovingSprite implements Serializable {
     public int locX, locY, tankHeight, tankWidth, diam;
 
     public static int tankMissileDamage, tankBulletDamage;
 
     public static final int MAX_HP = 1200;
 
-    private BufferedImage image;
+  //  private transient BufferedImage image;
 
-    private ArrayList<BulletSprite> bulletSprites;
+    private CopyOnWriteArrayList<BulletSprite> bulletSprites;
 
     private int numOfBullet, numOfMissiles;
 
-    private static BufferedImage turret1;
-    private static BufferedImage turret2;
+    protected int gunState;
+
+    private static transient BufferedImage turret1;
+    private static transient BufferedImage turret2;
+
+    protected boolean isVertical;
 
     public Tank() {
         super(500, 300, 100, 100, Tile.base, Tile.base2, -1);
-        locX = 500;
-        locY = 300;
+        this.locX = 500;
+        this.locY = 300;
         tankHeight = 100;
         tankWidth = 100;
         diam = 32;
         setBounds(locX, locY, tankHeight, tankWidth);
-        bulletSprites = new ArrayList<BulletSprite>();
+        bulletSprites = new CopyOnWriteArrayList<BulletSprite>();
         image = Tile.base;
         hp = 1200;
         tankMissileDamage = 100;
@@ -44,9 +53,10 @@ public class Tank extends MovingSprite {
         turret2 = Tile.turret2;
         numOfBullet = 300;
         numOfMissiles = 50;
+        isVertical = false;
     }
 
-    public void tick() {
+    public synchronized void  tick() {
         if (hp <= 0) {
         }
         {
@@ -55,6 +65,7 @@ public class Tank extends MovingSprite {
                     GameState.tank.locY -= 5;
                     GameState.sY -= 5;
                     image = Tile.base2;
+                    isVertical = true;
 
                 }
             }
@@ -63,6 +74,7 @@ public class Tank extends MovingSprite {
                     GameState.tank.locY += 5;
                     GameState.sY += 5;
                     image = Tile.base2;
+                    isVertical = true;
                 }
             }
             if (GameState.keyLEFT) {
@@ -70,6 +82,7 @@ public class Tank extends MovingSprite {
                     GameState.tank.locX -= 5;
                     GameState.sX -= 5;
                     image = Tile.base;
+                    isVertical = false;
                 }
 
             }
@@ -78,6 +91,7 @@ public class Tank extends MovingSprite {
                     GameState.tank.locX += 5;
                     GameState.sX += 5;
                     image = Tile.base;
+                    isVertical = false;
                 }
             }
         }
@@ -97,7 +111,16 @@ public class Tank extends MovingSprite {
         return false;
     } */
 
-    public boolean isColliding(Rectangle rectangle) {
+    public synchronized boolean isColliding(Rectangle rectangle) {
+        if(Main.connectionType == 0){
+            if(rectangle.intersects(new Rectangle(GameServer.otherTank.locX , GameServer.otherTank.locY , tankWidth , tankHeight)))
+                return true;
+        }
+        else if(Main.connectionType == 1){
+            if(rectangle.intersects(new Rectangle(GameClient.otherTank.locX , GameClient.otherTank.locY , tankWidth , tankHeight))) {
+                return true;
+            }
+        }
         for (MovingSprite ms : GameState.enemies.getMovingSprites()) {
             if (rectangle.intersects(ms)) {
                 ms.collideWithTank = true;
@@ -115,8 +138,8 @@ public class Tank extends MovingSprite {
     }
 
 
-    public void render(Graphics2D g2d, GameState state) {
-
+    public synchronized void render(Graphics2D g2d, GameState state) {
+        gunState = state.getGunState();
         g2d.drawImage(image, locX - state.sX, locY - state.sY, null);
         AffineTransform backupAt = g2d.getTransform();
         AffineTransform at = new AffineTransform();
@@ -124,8 +147,8 @@ public class Tank extends MovingSprite {
             g2d.draw(new Line2D.Double(state.getCenter().x + 33, state.getCenter().y + 30, state.getTargetPoint().x, state.getTargetPoint().y));
             double deltaX = -(state.getCenter().x + 33) + state.getTargetPoint().x;
             double deltaY = -(state.getCenter().y + 30) + state.getTargetPoint().y;
-            double rotation = Math.atan2(deltaY, deltaX);
-            at.rotate(rotation, state.getCenter().x + 33, state.getCenter().y + 30);
+            turretAngle = Math.atan2(deltaY, deltaX);
+            at.rotate(turretAngle, state.getCenter().x + 33, state.getCenter().y + 30);
         }
         g2d.setTransform(at);
         if (state.getGunState() == 0) {
@@ -144,7 +167,7 @@ public class Tank extends MovingSprite {
         }
     }
 
-    public ArrayList<BulletSprite> getBulletSprites() {
+    public CopyOnWriteArrayList<BulletSprite> getBulletSprites() {
         return bulletSprites;
     }
 
@@ -194,6 +217,36 @@ public class Tank extends MovingSprite {
 
     public void increaseMachinGunAmmo(){
         numOfBullet += 50;
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    @Override
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    public void setBulletSprites(CopyOnWriteArrayList<BulletSprite> bulletSprites) {
+        this.bulletSprites = bulletSprites;
+    }
+
+    public boolean isVertical() {
+        return isVertical;
+    }
+
+    public void setVertical(boolean vertical) {
+        isVertical = vertical;
+    }
+
+    public int getGunState() {
+        return gunState;
+    }
+
+    public void setGunState(int gunState) {
+        this.gunState = gunState;
     }
 }
 

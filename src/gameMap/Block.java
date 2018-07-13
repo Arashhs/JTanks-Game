@@ -4,13 +4,18 @@ import bufferstrategy.GameState;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Block extends Rectangle {
-    private BufferedImage image;
     private int id; //Specify block's type (Dirt , grass , etc)
     private boolean collidable;
     private boolean destructable;
     private boolean bulletCollidable;
+
+    private transient BufferedImage image;
+
 
     public Block(Rectangle r, int id , BufferedImage image) {
         setBounds(r);
@@ -101,4 +106,15 @@ public class Block extends Rectangle {
     public void setBulletCollidable(boolean bulletCollidable) {
         this.bulletCollidable = bulletCollidable;
     }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        image = Tile.tileImages.get(id);
+    }
+
 }

@@ -5,6 +5,9 @@ import bufferstrategy.Main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -12,8 +15,9 @@ public class BigEnemy extends MovingSprite {
 
     private int time;
     private ArrayList<BulletSprite> bullets;
+    private boolean isVertical;
 
-    public BigEnemy(int x , int y , int dx , int dy , BufferedImage image){
+    public BigEnemy(int x , int y , int dx , int dy , BufferedImage image , boolean vert){
         super(x, y , 100 , 100 , image , Tile.bigEnemyTurret , GameState.enemies.getMovingSprites().size());
         state = STATE_Alive;
         this.dx = dx;
@@ -25,6 +29,7 @@ public class BigEnemy extends MovingSprite {
         diam = 14;
         time = 0;
         bullets = new ArrayList<>();
+        isVertical = vert;
     }
 
     public void tick(){
@@ -50,6 +55,18 @@ public class BigEnemy extends MovingSprite {
             b.move(g);
     }
 
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
 
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        if(isVertical)
+            baseImage = Tile.bigEnemyBase2;
+        else
+            baseImage = Tile.bigEnemyBase1;
+        turretImage = image = Tile.bigEnemyTurret;
+    }
 
 }

@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 public abstract class Sprite extends Rectangle {
     protected int diam;
     protected double angle;
-    protected BufferedImage image;
 
     // velocity (pixels per millisecond)
     protected double dx;
@@ -22,6 +21,8 @@ public abstract class Sprite extends Rectangle {
 
     protected AffineTransform backupAt;
     protected AffineTransform at;
+
+    protected transient BufferedImage image;
 
     public Sprite(int x, int y, int width, int height) {
         this.x = x;

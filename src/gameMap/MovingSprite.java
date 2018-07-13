@@ -8,14 +8,15 @@ import java.awt.image.BufferedImage;
 
 public abstract class MovingSprite extends Sprite {
     protected int hp, diam;
-    protected BufferedImage baseImage;
-    protected BufferedImage turretImage;
     protected double turretAngle;
     protected int id;
 
     protected boolean collideWithTank;
 
     private PickUp deathLoot;
+
+    protected transient BufferedImage baseImage;
+    protected transient BufferedImage turretImage;
 
     public MovingSprite(int x, int y, int width, int height, BufferedImage baseImage, BufferedImage turretImage , int id) {
         super(x, y, width, height);
@@ -98,5 +99,9 @@ public abstract class MovingSprite extends Sprite {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public double getTurretAngle() {
+        return turretAngle;
     }
 }

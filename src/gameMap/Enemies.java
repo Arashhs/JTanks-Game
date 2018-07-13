@@ -3,10 +3,11 @@ package gameMap;
 import bufferstrategy.GameState;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Enemies{
+public class Enemies implements Serializable{
     public static final int EASY_Difficulty = 0;
     public static final int MEDIUM_DIFFICULTY = 1;
     public static final int HARD_DIFFICULTY = 2;
@@ -26,10 +27,10 @@ public class Enemies{
     public void addEnemy(char type , int tileWidth , int tileHeight){
         Point p = position(tileWidth , tileHeight);
         if(type == 'O'){
-            movingSprites.add(new BigEnemy(p.x , p.y , 5 , 0 , Tile.bigEnemyBase1) );
+            movingSprites.add(new BigEnemy(p.x , p.y , 5 , 0 , Tile.bigEnemyBase1 , false) );
         }
         else if(type == 'I'){
-            movingSprites.add(new BigEnemy(p.x , p.y , 0 , 5 , Tile.bigEnemyBase2));
+            movingSprites.add(new BigEnemy(p.x , p.y , 0 , 5 , Tile.bigEnemyBase2 , true));
         }
         else if(type == '1'){
             movingSprites.add(new MovingEnemy2(p.x , p.y , 0 , 5 , Tile.movingEnemy2_1));
@@ -38,10 +39,10 @@ public class Enemies{
             movingSprites.add(new Mine(p.x , p.y));
         }
         else if(type == '$'){
-            movingSprites.add(new BigRedGun(p.x , p.y , Tile.bigRedGun));
+            movingSprites.add(new BigRedGun(p.x , p.y , Tile.bigRedGun , true));
         }
         else if(type == '%'){
-            movingSprites.add(new BigRedGun(p.x , p.y , Tile.blueGun));
+            movingSprites.add(new BigRedGun(p.x , p.y , Tile.blueGun , false));
         }
     }
 

@@ -8,9 +8,10 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Level {
+public class Level implements Serializable {
    // public ArrayList<ArrayList<Block>> blocks;
     public Block[][] blocks = new Block[500][500];
 
@@ -98,43 +99,43 @@ public class Level {
                 // check if the char represents a sprite
                 else if (ch == 'O') {
                     GameState.enemies.addEnemy('O' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '!') {
                     GameState.enemies.addEnemy('I' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '1') {
                     GameState.enemies.addEnemy('1' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '#') {
                     GameState.enemies.addEnemy('#' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '$') {
                     GameState.enemies.addEnemy('$' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) ,0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '%') {
                     GameState.enemies.addEnemy('%' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '^') {
                     GameState.loots.addPickUp('^' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '&') {
                     GameState.loots.addPickUp('&' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '*') {
                     GameState.loots.addPickUp('*' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
                 else if (ch == '(') {
                     GameState.loots.addPickUp('(' , x , y);
-                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , tile , Tile.tileImages.get(0));
+                    newMap[x][y] = new Block(new Rectangle(x * Tile.tileSize , y * Tile.tileSize , Tile.tileSize , Tile.tileSize) , 0 , Tile.tileImages.get(0));
                 }
              /*   else if (ch == '!') {
                     addSprite(newMap, musicSprite, x, y);
