@@ -127,6 +127,8 @@ public class GameServer implements Runnable{
             otherTank.setAngle(ta.getTurretAngle());
             otherTank.locX = ta.locX;
             otherTank.locY = ta.locY;
+            otherTank.setVertical(ta.isVertical());
+            otherTank.setGunState(ta.getGunState());
         }
         catch (NullPointerException e){
             try {

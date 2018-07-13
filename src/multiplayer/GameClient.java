@@ -75,6 +75,8 @@ public class GameClient implements Runnable {
         otherTank.setAngle(ta.getTurretAngle());
         otherTank.locX = ta.locX;
         otherTank.locY = ta.locY;
+        otherTank.setVertical(ta.isVertical());
+        otherTank.setGunState(ta.getGunState());
     }
 
 }
