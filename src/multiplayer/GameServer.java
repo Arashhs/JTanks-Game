@@ -2,6 +2,7 @@ package multiplayer;
 
 import bufferstrategy.GameLoop;
 import bufferstrategy.Main;
+import gameMap.Level;
 import gameMap.Tank;
 
 import java.io.IOException;
@@ -124,7 +125,7 @@ public class GameServer implements Runnable{
         try {
             otherTank.setBulletSprites(ta.getBulletSprites());
             otherTank.setHp(ta.getHp());
-            otherTank.setAngle(ta.getTurretAngle());
+            otherTank.setOtherAngle(ta.getTurretAngle());
             otherTank.locX = ta.locX;
             otherTank.locY = ta.locY;
             otherTank.setVertical(ta.isVertical());

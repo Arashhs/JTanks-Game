@@ -14,10 +14,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class OtherTank extends Tank {
     private int weapstate;
     private BufferedImage thisImage;
+    private double otherAngle;
     public OtherTank(int cx , int cy , int turretAngle , int weaponSelected, CopyOnWriteArrayList<BulletSprite> bullets){
         locX = cx;
         locY = cy;
-        this.angle = turretAngle;
+        otherAngle = turretAngle;
         weapstate = weaponSelected;
         setBulletSprites(new CopyOnWriteArrayList<>());
         thisImage = Tile.base;
@@ -37,7 +38,7 @@ public class OtherTank extends Tank {
         g2d.drawImage(thisImage, locX - state.sX, locY - state.sY, null);
         backupAt = g2d.getTransform();
         at = new AffineTransform();
-        at.rotate(angle, locX - state.sX + diam/2 + 33 ,locY - state.sY + diam/2 + 30 );
+        at.rotate(otherAngle, locX - state.sX + diam/2 + 33 ,locY - state.sY + diam/2 + 30 );
         g2d.setTransform(at);
         g2d.drawImage(image , locX + diam/2 - state.sX  , locY + diam/2 - state.sY ,null);
 
@@ -59,5 +60,11 @@ public class OtherTank extends Tank {
         this.weapstate = weapstate;
     }
 
+    public double getOtherAngle() {
+        return otherAngle;
+    }
 
+    public void setOtherAngle(double otherAngle) {
+        this.otherAngle = otherAngle;
+    }
 }

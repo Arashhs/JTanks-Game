@@ -3,9 +3,7 @@ package multiplayer;
 import bufferstrategy.GameLoop;
 import bufferstrategy.GameState;
 import bufferstrategy.Main;
-import gameMap.BigEnemy;
-import gameMap.Tank;
-import gameMap.Tile;
+import gameMap.*;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -55,6 +53,8 @@ public class GameClient implements Runnable {
 
     public void tick() {
         Tank ta;
+        Level lvl;
+        Enemies enemies;
 
             try {
                 networkOutputStream.writeObject(GameLoop.getState().getTank());
@@ -72,7 +72,7 @@ public class GameClient implements Runnable {
     public void initOtherTank(Tank ta){
         otherTank.setBulletSprites(ta.getBulletSprites());
         otherTank.setHp(ta.getHp());
-        otherTank.setAngle(ta.getTurretAngle());
+        otherTank.setOtherAngle(ta.getTurretAngle());
         otherTank.locX = ta.locX;
         otherTank.locY = ta.locY;
         otherTank.setVertical(ta.isVertical());
