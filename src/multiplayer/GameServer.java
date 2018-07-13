@@ -130,6 +130,8 @@ public class GameServer implements Runnable{
             otherTank.locY = ta.locY;
             otherTank.setVertical(ta.isVertical());
             otherTank.setGunState(ta.getGunState());
+            otherTank.setMachinGunUpgraded(ta.isMachinGunUpgraded());
+            otherTank.setCannonUpgraded(ta.isCannonUpgraded());
         }
         catch (NullPointerException e){
             try {

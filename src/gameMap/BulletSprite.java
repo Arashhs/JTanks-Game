@@ -1,6 +1,9 @@
 package gameMap;
 
 import bufferstrategy.GameState;
+import bufferstrategy.Main;
+import multiplayer.GameClient;
+import multiplayer.GameServer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -53,6 +56,21 @@ public abstract class BulletSprite extends Sprite {
                 GameState.tank.bulletHit(this);
                 collided = true;
                 return true;
+            }
+            Rectangle otherTank;
+            if(Main.connectionType == 0){
+                otherTank = new Rectangle(GameServer.otherTank.locX , GameServer.otherTank.locY , GameState.tank.width , GameState.tank.height);
+                if(otherTank.intersects(r)){
+                    collided = true;
+                    return true;
+                }
+            }
+            else if(Main.connectionType == 1){
+                otherTank = new Rectangle(GameClient.otherTank.locX , GameClient.otherTank.locY , GameState.tank.width , GameState.tank.height);
+                if(otherTank.intersects(r)){
+                    collided = true;
+                    return true;
+                }
             }
         }
         return false;

@@ -31,28 +31,59 @@ public class BigRedGun extends MovingSprite {
     }
 
     public void tick(){
-        super.tick();
-        time++;
-        time %= 150;
-        if(time == 0 && Math.abs(x - GameState.tank.locX) < 800 && Math.abs(y - GameState.tank.locY) < 800){
-            BigMissile missile = new BigMissile(this , turretAngle);
-            missile.shoot();
-            bullets.add(missile);
-        }
+        if(Main.gameMode == 0) {
+            super.tick();
+            time++;
+            time %= 150;
+            if (time == 0 && Math.abs(x - GameState.tank.locX) < 800 && Math.abs(y - GameState.tank.locY) < 800) {
+                BigMissile missile = new BigMissile(this, turretAngle);
+                missile.shoot();
+                bullets.add(missile);
+            }
 
-        for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).isCollided()) {
-                bullets.remove(i);
-                continue;
+            for (int i = 0; i < bullets.size(); i++) {
+                if (bullets.get(i).isCollided()) {
+                    bullets.remove(i);
+                    continue;
+                }
+            }
+        }
+        else if(Main.gameMode == 1){
+            super.tick();
+            time++;
+            time %= 150;
+            if (time == 0 && (distanceInteger(GameState.tank.locX , GameState.tank.locY , x , y) < 650 || distanceInteger(Main.otherTank.locX , Main.otherTank.locY , x , y) < 650 )) {
+                BigMissile missile = new BigMissile(this, turretAngle);
+                missile.shoot();
+                bullets.add(missile);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                if (bullets.get(i).isCollided()) {
+                    bullets.remove(i);
+                    continue;
+                }
             }
         }
     }
 
     public void render(Graphics2D g , GameState state){
-        turretAngle = Math.atan2(state.tank.locY - y - 10  ,  state.tank.locX - x - 10 ) ;
-        drawRotated(turretAngle , x + 30 - GameState.sX , y + 30 - GameState.sY , g);
-        for(BulletSprite b: bullets)
-            b.move(g);
+        if(Main.gameMode == 0) {
+            turretAngle = Math.atan2(state.tank.locY - y - 10, state.tank.locX - x - 10);
+            drawRotated(turretAngle, x + 30 - GameState.sX, y + 30 - GameState.sY, g);
+            for (BulletSprite b : bullets)
+                b.move(g);
+        }
+        else if(Main.gameMode == 1){
+            if(distanceInteger(GameState.tank.locX , GameState.tank.locY , x , y) <= distanceInteger(Main.otherTank.locX , Main.otherTank.locY , x , y)) {
+                turretAngle = Math.atan2(state.tank.locY - y - 10, state.tank.locX - x - 10);
+            }
+            else {
+                turretAngle = Math.atan2(Main.otherTank.locY - y - 10, Main.otherTank.locX - x - 10);
+            }
+            drawRotated(turretAngle, x + 30 - GameState.sX, y + 30 - GameState.sY, g);
+            for (BulletSprite b : bullets)
+                b.move(g);
+        }
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {

@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  * 
  * @author Seyed Mohammad Ghaffarian
  */
-public class GameState {
+public class GameState implements Serializable {
 	
 /*	public int locX, locY, tankHeight, tankWidth, diam; */
 	public int gameOver; //0: Playing | 1: Game over | 2: Win
@@ -116,7 +117,7 @@ public class GameState {
 	/**
 	 * The keyboard handler.
 	 */
-	class KeyHandler extends KeyAdapter {
+	class KeyHandler extends KeyAdapter implements Serializable {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -164,10 +165,10 @@ public class GameState {
 	/**
 	 * The mouse handler.
 	 */
-	class MouseHandler extends MouseAdapter {
+	class MouseHandler extends MouseAdapter implements Serializable {
 
 		@Override
-		public void mousePressed(MouseEvent e) {
+		public synchronized void mousePressed(MouseEvent e) {
 			mouseX = e.getX();
 			mouseY = e.getY();
 			mousePress = true;
@@ -295,5 +296,25 @@ public class GameState {
     public void setGameOver(int gameOver) {
         this.gameOver = gameOver;
     }
+
+	public static Tank getTank() {
+		return tank;
+	}
+
+	public static Level getLevel() {
+		return level;
+	}
+
+	public static void setLevel(Level level) {
+		GameState.level = level;
+	}
+
+	public static Enemies getEnemies() {
+		return enemies;
+	}
+
+	public static void setEnemies(Enemies enemies) {
+		GameState.enemies = enemies;
+	}
 }
 

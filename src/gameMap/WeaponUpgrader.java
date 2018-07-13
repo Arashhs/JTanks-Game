@@ -13,11 +13,13 @@ public class WeaponUpgrader extends PickUp {
         if(gState.getGunState() == 0){
             Tank.tankMissileDamage += 100;
             Tank.setTurret1(Tile.turret1Upgraded);
+            gState.getTank().setCannonUpgraded(true);
             GameState.lastEvent = "Cannon's damage Upgraded!";
         }
         else if (gState.getGunState() == 1){
             Tank.tankBulletDamage += 40;
             Tank.setTurret2(Tile.turret2Upgraded);
+            gState.getTank().setMachinGunUpgraded(true);
             GameState.lastEvent = "Bullet's damage Upgraded!";
         }
     }

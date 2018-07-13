@@ -141,6 +141,7 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
             Main.connectionType = 0;
             layout.show(panel , "Game");
         } else if(source == client){
+            Main.gameDifficulty = 1;
             Main.connectionType = 1;
         }
 
@@ -151,7 +152,7 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
         @Override
     public void run() {
         this.setVisible(true);
-        while (Main.gameDifficulty == 0){
+        while (Main.gameDifficulty == 0 && Main.connectionType != 1){
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

@@ -34,6 +34,8 @@ public class Tank extends MovingSprite implements Serializable {
     private static transient BufferedImage turret2;
 
     protected boolean isVertical;
+    protected boolean cannonUpgraded;
+    protected boolean machinGunUpgraded;
 
     public Tank() {
         super(500, 300, 100, 100, Tile.base, Tile.base2, -1);
@@ -54,6 +56,8 @@ public class Tank extends MovingSprite implements Serializable {
         numOfBullet = 300;
         numOfMissiles = 50;
         isVertical = false;
+        cannonUpgraded = false;
+        machinGunUpgraded = false;
     }
 
     public synchronized void  tick() {
@@ -247,6 +251,22 @@ public class Tank extends MovingSprite implements Serializable {
 
     public void setGunState(int gunState) {
         this.gunState = gunState;
+    }
+
+    public boolean isCannonUpgraded() {
+        return cannonUpgraded;
+    }
+
+    public void setCannonUpgraded(boolean cannonUpgraded) {
+        this.cannonUpgraded = cannonUpgraded;
+    }
+
+    public boolean isMachinGunUpgraded() {
+        return machinGunUpgraded;
+    }
+
+    public void setMachinGunUpgraded(boolean machinGunUpgraded) {
+        this.machinGunUpgraded = machinGunUpgraded;
     }
 }
 

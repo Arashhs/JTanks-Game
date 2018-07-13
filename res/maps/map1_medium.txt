@@ -1,30 +1,32 @@
-# Map file for tile-based game
+# Medium Map file for tile-based game
 # (Lines that start with '#' are comments)
 # The tiles are:
-# (Space) Empty tile
+# (Space) Dirt tile
 # A..Z Tiles A through Z
 # o Tank enemy moving horizontal
 # ! Tank enemy moving Vertical
+# 1 Suicidal machine unit!
 # # Mine
 # $ Big red missile launcher
 # % Big blue missile launcher
-# * Goal
-# 1 Bad Guy 1 (grub)
-# 2 Bad Guy 2 (fly)
+# ^ Weapon Upgrader
+# & Repair Kit
+# * Cannon ammo
+# ( MachinGun ammo
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 B                          BBB   !       !                    1          JJ       JJ      BBBB         JJJJJJ
-B                          BBB                                           JJ   $   JJ   $  BBBB         JJJJJJ
+B                          BBB                                           JJ   $   JJ   $  BBBB    (    JJJJJJ
 B  1 CCCCCCCCCCC           BBB               BBBBBBBBBBBBBBB             JJ       JJ      BBBB         JJJJJJ
 B  1 C         C           BBB               BB  ^  BBBBBBBBB            JJ       JJ      BBBBJDDDDDDDJJJJJJJJJJJJJJ
-B    C         C           BBB              BBBDDDDDBBBBBBBBBBBBBBBB     JJJJJJJJJJJJJJJJJBBB 1          1 JJJJJJ
-B    C    ^    CCCCCCCC    BBB             BB                DD   BB                     BBBB      !       JJJJJJ
-B    C               CC    BBBJJJJJJJJ # # BB                DD   BB                     BBBB              JJJJJJ
-B    C          ^     BDDDBBBB                  CCCCCCCCCC   DD   BB                     BBBB              JJJJJJ
-B    C                B   BBBB                  CMMMMMMMMC   BBBBBBB                  O  BBBB              JJJJJJ                         B
+B    C         C           BBB      &       BBBDDDDDBBBBBBBBBBBBBBBB     JJJJJJJJJJJJJJJJJBBB 1          1 JJJJJJ
+B    C         CCCCCCCC    BBB             BB                DD   BB                     BBBB      !       JJJJJJ
+B    C               CC    BBBJJJJJJJJ # # BB                DD * BB                     BBBB              JJJJJJ
+B    C                BDDDBBBB                  CCCCCCCCCC   DD   BB                     BBBB              JJJJJJ
+B    C                B   BBBB (                CMMMMMMMMC   BBBBBBB                  O  BBBB              JJJJJJ                         B
 B    C                B ^ BBBB                  CMMMMMMMMC       BBB                                       JJJJJJ                         B
-B    CCCCCCC # # CCCCCCBBBBBBBBJJJJJJJJJJJ      CCCCCCCCCC       BBB                                       JJJJJJ                         B
-B     J                 BBB      1      JJ      C       C        BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB # # # # #  JJJJJJJJJJJJ                   B
-B     J               O BBB              J       C  !  C       BBBBBBCCCCCCCCC                             JJ     BBBBB       $      $    B
+B    CCCCCCC # # CCCCCCBBBBBBBBJJJJJJJJJJJ      CCCCCCCCCC       BBB    *                                  JJJJJJ                         B
+B     J                 BBB      1      JJ      C   *   C        BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB # # # # #  JJJJJJJJJJJJ                   B
+B     J               O BBB              J       C  !  C       BBBBBBCCCCCCCCC   &                         JJ     BBBBB       $      $    B
 B     J                 BBB              J                    BBBBBBBCCMMMMCCC                   !         JJ  %  BBBBB                  BB
 B     J                 BBB                                   BBBBBBBBBCCMMC                               JJ     BBBBB                  BB
 B                      BBBJJJJJJ    JJJ         CCCCCCCC      BBBBBBBBBBCCCC            BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB      BBBBBBB
@@ -33,7 +35,7 @@ B                !     BBB            JBBBBBBBBB              BBBBBBBBBBBBB     
 B                      BBB            J                   BBBBBBBBBBBBCJJJJ             JJJJJJJJJJJJJJJCCCCCCCCCCCC                      BB
 B                      BBB            J                   BBB   ^   BBCJJJJ                             CCMMMMMMMCCC                     BB
 B                      BBB            J                   BBB       BBCJJJJ  O             !            CCCCCCCCCCCC                     BB
-B                      BBBBB      BBBBBBBBBBBBBBBBBBBBBBBBBBBDDDDDDDBB                                  CC         CC                    BB
+B                      BBBBB      BBBBBBBBBBBBBBBBBBBBBBBBBBBDDDDDDDBB                               (  CC         CC                    BB
 B        !              D         JJJJJJJJ            CCCCCCCC     1                                                                     BB
 B                       D         JJJJJJJJ            CCMMMMCC                                                                           BB
 B                       D         JJJJJJJJ            CCMMMMCC     1                                                                     BBB

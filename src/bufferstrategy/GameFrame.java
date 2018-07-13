@@ -4,6 +4,8 @@ package bufferstrategy;
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import gameMap.Tile;
 import javafx.scene.transform.Rotate;
+import multiplayer.GameClient;
+import multiplayer.GameServer;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -49,6 +51,13 @@ public class GameFrame extends JFrame {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
 		lastRender = -1;
 		fpsHistory = new ArrayList<>(100);
+
+		if(Main.connectionType == 1){
+			Main.otherTank = GameClient.otherTank;
+		}
+		else if(Main.connectionType == 0){
+			Main.otherTank = GameServer.otherTank;
+		}
 
 	/*	try{
 			base = ImageIO.read(new File("res\\tank.png"));
@@ -120,8 +129,12 @@ public class GameFrame extends JFrame {
 
 		state.level.render(g2d , state);
 		state.tank.render(g2d , state);
+		if(Main.gameMode == 1)
+				Main.otherTank.render(g2d , state);
 		state.enemies.render(g2d , state);
 		state.loots.render(g2d , state);
+
+
 
 	/*	g2d.setColor(Color.BLACK);
 		g2d.fillOval(state.locX, state.locY, state.diam, state.diam);

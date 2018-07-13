@@ -33,18 +33,37 @@ public class BigEnemy extends MovingSprite {
     }
 
     public void tick(){
-        super.tick();
-        time++;
-        time %= 100;
-        if(time == 0 && Math.abs(x - GameState.tank.locX) < 800 && Math.abs(y - GameState.tank.locY) < 500){
-            Missile missile = new Missile(this , turretAngle);
-            missile.shoot();
-            bullets.add(missile);
+        if(Main.gameMode == 0) {
+            super.tick();
+            time++;
+            time %= 100;
+            if (time == 0 && Math.abs(x - GameState.tank.locX) < 800 && Math.abs(y - GameState.tank.locY) < 500) {
+                Missile missile = new Missile(this, turretAngle);
+                missile.shoot();
+                bullets.add(missile);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                if (bullets.get(i).isCollided()) {
+                    bullets.remove(i);
+                    continue;
+                }
+            }
         }
-        for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).isCollided()) {
-                bullets.remove(i);
-                continue;
+        else if(Main.gameMode == 1){
+            super.tick();
+            time++;
+            time %= 100;
+            if (time == 0 && (distanceInteger(GameState.tank.locX , GameState.tank.locY , x , y) < 650 || distanceInteger(Main.otherTank.locX , Main.otherTank.locY , x , y) < 650 )) {
+                Missile missile = new Missile(this, turretAngle);
+
+                missile.shoot();
+                bullets.add(missile);
+            }
+            for (int i = 0; i < bullets.size(); i++) {
+                if (bullets.get(i).isCollided()) {
+                    bullets.remove(i);
+                    continue;
+                }
             }
         }
     }

@@ -24,7 +24,7 @@ public class GameLoop implements Runnable {
 	public static final int FPS = 60;
 	
 	private GameFrame canvas;
-	private GameState state;
+	private static GameState state;
 
 	public GameLoop(GameFrame frame) {
 		canvas = frame;
@@ -58,5 +58,13 @@ public class GameLoop implements Runnable {
 			}
 		}
 		canvas.render(state);
+	}
+
+	public static GameState getState() {
+		return state;
+	}
+
+	public static void setState(GameState state) {
+		GameLoop.state = state;
 	}
 }
