@@ -11,31 +11,37 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Tank for the player
+ * it extends from movingSprite
+ */
 public class Tank extends MovingSprite implements Serializable {
     public int locX, locY, tankHeight, tankWidth, diam;
 
-    public static int tankMissileDamage, tankBulletDamage;
+    public transient static int tankMissileDamage, tankBulletDamage;
 
-    public static final int MAX_HP = 1200;
+    public transient static final int MAX_HP = 1200;
 
   //  private transient BufferedImage image;
 
     private CopyOnWriteArrayList<BulletSprite> bulletSprites;
 
-    private int numOfBullet, numOfMissiles;
+    private transient int numOfBullet, numOfMissiles;
 
     protected int gunState;
 
-    private static transient BufferedImage turret1;
-    private static transient BufferedImage turret2;
+    private transient static BufferedImage turret1;
+    private transient static BufferedImage turret2;
 
     protected boolean isVertical;
     protected boolean cannonUpgraded;
     protected boolean machinGunUpgraded;
+    protected int mineId;
 
     public Tank() {
         super(500, 300, 100, 100, Tile.base, Tile.base2, -1);
@@ -58,8 +64,14 @@ public class Tank extends MovingSprite implements Serializable {
         isVertical = false;
         cannonUpgraded = false;
         machinGunUpgraded = false;
+        mineId = -1;
     }
 
+    /**
+     * Acts when player press a button
+     * This also doesn't let player to go through hard walls or other sprites
+     * The basis of the gameplay indeed :)
+     */
     public synchronized void  tick() {
         if (hp <= 0) {
         }
@@ -115,6 +127,11 @@ public class Tank extends MovingSprite implements Serializable {
         return false;
     } */
 
+    /**
+     * Controls whether or not this tank collide whith another sprite or block
+     * @param rectangle movingSprite we want to check whether or not it collides with another one
+     * @return tank collides with another sprite/block or not
+     */
     public synchronized boolean isColliding(Rectangle rectangle) {
         if(Main.connectionType == 0){
             if(rectangle.intersects(new Rectangle(GameServer.otherTank.locX , GameServer.otherTank.locY , tankWidth , tankHeight)))
@@ -142,6 +159,11 @@ public class Tank extends MovingSprite implements Serializable {
     }
 
 
+    /**
+     * Renders and shows the player's tank
+     * @param g2d Graphic's object
+     * @param state Current game state
+     */
     public synchronized void render(Graphics2D g2d, GameState state) {
         gunState = state.getGunState();
         g2d.drawImage(image, locX - state.sX, locY - state.sY, null);
@@ -171,6 +193,7 @@ public class Tank extends MovingSprite implements Serializable {
         }
     }
 
+    /* ***************Getter and Setters*************** */
     public CopyOnWriteArrayList<BulletSprite> getBulletSprites() {
         return bulletSprites;
     }
@@ -268,6 +291,41 @@ public class Tank extends MovingSprite implements Serializable {
     public void setMachinGunUpgraded(boolean machinGunUpgraded) {
         this.machinGunUpgraded = machinGunUpgraded;
     }
+
+    public int getMineId() {
+        return mineId;
+    }
+
+    public void setMineId(int mineId) {
+        this.mineId = mineId;
+    }
+    /* ***************Getter and Setters*************** */
+
+
+    /*   private void writeObject(java.io.ObjectOutputStream stream)
+            throws IOException {
+        stream.writeObject(bulletSprites);
+        stream.writeDouble(turretAngle);
+        stream.writeInt(locX);
+        stream.writeInt(locY);
+        stream.writeBoolean(isVertical);
+        stream.writeInt(gunState);
+        stream.writeBoolean(machinGunUpgraded);
+        stream.writeBoolean(cannonUpgraded);
+    }
+
+    private void readObject(java.io.ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        bulletSprites = (CopyOnWriteArrayList<BulletSprite>) stream.readObject();
+        turretAngle = stream.readDouble();
+        locX = stream.readInt();
+        locY = stream.readInt();
+        isVertical = stream.readBoolean();
+        gunState = stream.readInt();
+        machinGunUpgraded = stream.readBoolean();
+        cannonUpgraded = stream.readBoolean();
+
+    } */
 }
 
 

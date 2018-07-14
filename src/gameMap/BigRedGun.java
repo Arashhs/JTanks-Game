@@ -10,10 +10,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class BigRedGun extends MovingSprite {
     private int time;
-    private ArrayList<BulletSprite> bullets;
+    private CopyOnWriteArrayList<BulletSprite> bullets;
 
     private boolean isRed;
 
@@ -26,7 +27,7 @@ public class BigRedGun extends MovingSprite {
         turretAngle = 0;
         diam = 14;
         time = 0;
-        bullets = new ArrayList<>();
+        bullets = new CopyOnWriteArrayList<>();
         isRed = red;
     }
 
@@ -52,7 +53,7 @@ public class BigRedGun extends MovingSprite {
             super.tick();
             time++;
             time %= 150;
-            if (time == 0 && (distanceInteger(GameState.tank.locX , GameState.tank.locY , x , y) < 650 || distanceInteger(Main.otherTank.locX , Main.otherTank.locY , x , y) < 650 )) {
+            if (time == 0 && (distanceInteger(GameState.tank.locX , GameState.tank.locY , x , y) < 600 || distanceInteger(Main.otherTank.locX , Main.otherTank.locY , x , y) < 600 )) {
                 BigMissile missile = new BigMissile(this, turretAngle);
                 missile.shoot();
                 bullets.add(missile);

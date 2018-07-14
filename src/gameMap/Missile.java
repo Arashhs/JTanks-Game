@@ -11,6 +11,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * A class that simulates the missiles
+ * @author Arash
+ */
 public class Missile extends BulletSprite {
 
     public Missile(Rectangle source , double teta) {
@@ -19,11 +23,22 @@ public class Missile extends BulletSprite {
         damage = 100;
     }
 
+    /**
+     * Customized serialization
+     * @param out outPutStream
+     * @throws IOException
+     */
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
 
     }
 
+    /**
+     * Customized serialization
+     * @param in inputStream
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         image = Tile.missle;

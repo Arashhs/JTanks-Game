@@ -13,23 +13,23 @@ package bufferstrategy;
  * patterns is available in the following link:
  *    http://gameprogrammingpatterns.com/game-loop.html
  * 
- * @author Seyed Mohammad Ghaffarian
+ * @author base code: Seyed Mohammad Ghaffarian | Modified by Arash Hajisafi
  */
 public class GameLoop implements Runnable {
-	
+
 	/**
 	 * Frame Per Second.
 	 * Higher is better, but any value above 24 is fine.
 	 */
 	public static final int FPS = 60;
-	
+
 	private GameFrame canvas;
 	private static GameState state;
 
 	public GameLoop(GameFrame frame) {
 		canvas = frame;
 	}
-	
+
 	/**
 	 * This must be called before the game loop starts.
 	 */
@@ -44,17 +44,17 @@ public class GameLoop implements Runnable {
 	public void run() {
 		int gameOver = 0;
 		while (gameOver == 0) {
-			try {
-				long start = System.currentTimeMillis();
-				//
-				state.update();
-				canvas.render(state);
-				gameOver = state.gameOver;
-				//
-				long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
-				if (delay > 0)
-					Thread.sleep(delay);
-			} catch (InterruptedException ex) {
+				try {
+					long start = System.currentTimeMillis();
+					//
+					state.update();
+					canvas.render(state);
+					gameOver = state.gameOver;
+					//
+					long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
+					if (delay > 0)
+						Thread.sleep(delay);
+				} catch (InterruptedException ex) {
 			}
 		}
 		canvas.render(state);

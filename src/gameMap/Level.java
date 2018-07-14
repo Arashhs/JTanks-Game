@@ -3,6 +3,7 @@ package gameMap;
 import bufferstrategy.GameFrame;
 import bufferstrategy.GameState;
 import bufferstrategy.Main;
+import java.lang.String;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -11,9 +12,16 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Level class for game
+ * This holds the information of all blocks (Tiles)
+ * This also loads map
+ * @author Arash
+ */
 public class Level implements Serializable {
    // public ArrayList<ArrayList<Block>> blocks;
     public Block[][] blocks = new Block[500][500];
+    private int width, height;
 
     public Level() {
   /*  for(int x = 0 ; x < blocks.length ; x++){
@@ -38,6 +46,10 @@ public class Level implements Serializable {
         }
     }
 
+    /**
+     * This updates the state for tank
+     * @param state GameState for main game
+     */
     public void tick(GameState state){
         if(GameState.tank.getHp() <= 0) {
             GameState.tank.setHp(0);
@@ -46,7 +58,11 @@ public class Level implements Serializable {
     }
 
 
-
+    /**
+     * Render and show the tiles in the game
+     * @param g Graphic's object
+     * @param state Current gameState
+     */
     public void render(Graphics2D g , GameState state){
         for (int i = Math.max ((state.tank.locX / Tile.tileSize - 9) , 0 )  ; i < Math.min( (state.tank.locX / Tile.tileSize) + 13 , blocks.length)  ; i++) {
            for (int j = Math.max ((state.tank.locY / Tile.tileSize - 6) , 0 )  ; j < Math.min( (state.tank.locY / Tile.tileSize) + 13 , blocks[i].length)  ; j++){
@@ -55,10 +71,16 @@ public class Level implements Serializable {
         }
     }
 
+    /**
+     * Loads map from a text file
+     * @param filename text file path
+     * @return List of all tiles (Blocks)
+     * @throws IOException
+     */
     public Block[][] loadMap(String filename) throws IOException {
         ArrayList<String> lines = new ArrayList();
-        int width = 0;
-        int height = 0;
+        width = 0;
+        height = 0;
         // read every line in the text file into the list
         BufferedReader reader = new BufferedReader(
                 new FileReader(filename));
@@ -159,4 +181,22 @@ public class Level implements Serializable {
         newMap.setPlayer(player); */
         return newMap;
     }
+
+    /**
+     * Converts current map data (Blocks) to String to save and load easily
+     * @return Map data
+     */
+    public java.lang.String mapToText(){
+        ArrayList<String> lines = new ArrayList();
+        StringBuilder line = new StringBuilder();
+        for(int i = 0 ; i < height ; i++){
+            for(int j = 0 ; j < width ; j++){
+                line.append(blocks[j][i].getId());
+            }
+            line.append("\n");
+        }
+        System.out.println(line.toString());
+        return line.toString();
+    }
+
 }

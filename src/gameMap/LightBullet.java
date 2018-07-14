@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * LightBullet for machineGun
+ * @author Arash
+ */
 public class LightBullet extends BulletSprite {
 
     public LightBullet(Rectangle source , double teta) {

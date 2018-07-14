@@ -6,6 +6,12 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+/**
+ * This is a simple Sprite class
+ * All player - enemy - pickUp classes extend from this one
+ * So call this a all-father class for this game :)
+ * @author Arash
+ */
 public abstract class Sprite extends Rectangle {
     protected int diam;
     protected double angle;
@@ -40,6 +46,13 @@ public abstract class Sprite extends Rectangle {
         dy = 0;
     }
 
+    /**
+     * Draws a rotated pic (Turret more likely) in the given coordinate
+     * @param angle angle
+     * @param x x
+     * @param y y
+     * @param g Graphic's item
+     */
     public void drawRotated(double angle , int x , int y , Graphics2D g){
         backupAt = g.getTransform();
         at = new AffineTransform();
@@ -49,6 +62,11 @@ public abstract class Sprite extends Rectangle {
         g.setTransform(backupAt);
     }
 
+    /**
+     * Controls whether or not two sprite collide
+     * @param rectangle Sprite we want to control
+     * @return true or false
+     */
     public boolean isBulletColliding(Rectangle rectangle) {
         for (int i = Math.max((int) ((x) / Tile.tileSize) - 2 , 0); i < Math.min((int) ((x + width) / Tile.tileSize) + 2, GameState.level.blocks.length); i++) {
             for (int j = Math.max((int) ((y) / Tile.tileSize) - 2, 0); j < Math.min((int) ((y+ height) / Tile.tileSize) + 2, GameState.level.blocks[i].length); j++) {
@@ -65,6 +83,7 @@ public abstract class Sprite extends Rectangle {
     }
 
 
+    /* *********Getter and Setters*********** */
     public int getDiam() {
         return diam;
     }
@@ -104,4 +123,5 @@ public abstract class Sprite extends Rectangle {
     public void setDy(int dy) {
         this.dy = dy;
     }
+    /* *********Getter and Setters*********** */
 }

@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 /**
  * Program start.
  * 
- * @author Seyed Mohammad Ghaffarian
+ * @author Arash Hajisafi
  */
 public class Main {
 	public static int gameMode; //0: Single Player | 1: Multiplayer
@@ -21,7 +21,7 @@ public class Main {
 	public static GameServer gameServer;
 	public static GameClient gameClient;
 
-	public static OtherTank otherTank;
+	public static OtherTank otherTank; //Other player for MP play
 
     public static void main(String[] args) {
 		new Tile(); //load Images

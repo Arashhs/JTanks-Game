@@ -29,7 +29,7 @@ import javax.swing.JFrame;
  *    http://docs.oracle.com/javase/tutorial/extra/fullscreen/bufferstrategy.html
  *    http://docs.oracle.com/javase/8/docs/api/java/awt/image/BufferStrategy.html
  * 
- * @author Base code: Seyed Mohammad Ghaffarian / Heavily modified by: Arash Hajisafi
+ * @author Base sample: Seyed Mohammad Ghaffarian / Heavily modified by: Arash Hajisafi
  */
 public class GameFrame extends JFrame {
 	
@@ -119,20 +119,22 @@ public class GameFrame extends JFrame {
 	private void doRendering(Graphics2D g2d, GameState state) {
 		// Draw background
 	//	g2d.setColor(new Color(235,244,250));
-		g2d.setColor(new Color(190,214,220));
+		if((!state.isPaused() || Main.gameMode == 1) && !GameState.isServerPause()) {
+			g2d.setColor(new Color(190, 214, 220));
 
-		g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+			g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
-		state.level.tick(state);
-		state.tank.tick();
-		state.enemies.tick(state);
+			state.level.tick(state);
+			state.tank.tick();
+			state.enemies.tick(state);
 
-		state.level.render(g2d , state);
-		state.tank.render(g2d , state);
-		if(Main.gameMode == 1)
-				Main.otherTank.render(g2d , state);
-		state.enemies.render(g2d , state);
-		state.loots.render(g2d , state);
+			state.level.render(g2d, state);
+			state.tank.render(g2d, state);
+			if (Main.gameMode == 1)
+				Main.otherTank.render(g2d, state);
+			state.enemies.render(g2d, state);
+			state.loots.render(g2d, state);
+		}
 
 
 
@@ -201,14 +203,28 @@ public class GameFrame extends JFrame {
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
-		}
-		if (state.gameOver == 2) {
+		} // Winning a game
+		else if (state.gameOver == 2) {
 			String str = "You win the game!";
 			g2d.setColor(Color.WHITE);
 			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
 			int strWidth = g2d.getFontMetrics().stringWidth(str);
 			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
-		}
+		} // Game Paused
+		else if(state.isPaused() && Main.gameMode == 0){
+			String str = "Paused";
+			g2d.setColor(Color.WHITE);
+			g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+			int strWidth = g2d.getFontMetrics().stringWidth(str);
+			g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+		} // Server Paused
+        else if(GameState.isServerPause()){
+            String str = "Other player Left, Waiting for Reconnect...";
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+            int strWidth = g2d.getFontMetrics().stringWidth(str);
+            g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+        }
 	}
 	
 }

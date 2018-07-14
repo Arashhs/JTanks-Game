@@ -8,6 +8,10 @@ import multiplayer.GameServer;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * A class for bullets' specifications
+ * @author Arash
+ */
 public abstract class BulletSprite extends Sprite {
     protected int bulletSpeed;
     protected int damage;
@@ -26,6 +30,9 @@ public abstract class BulletSprite extends Sprite {
         source = 0;
     }
 
+    /**
+     * Shoot the boolet!
+     */
     public void shoot(){
         shooting = true;
         state = 0;
@@ -34,6 +41,10 @@ public abstract class BulletSprite extends Sprite {
         dy = (bulletSpeed) * Math.sin(angle);
     }
 
+    /**
+     * Rendering bullet's movement
+     * @param g Graphics object for main frame
+     */
     public void move(Graphics2D g){
         Rectangle rec = new Rectangle(x,y,width,height);
         if( isCollidingWithSprite(rec) || isBulletColliding(rec)){
@@ -45,6 +56,11 @@ public abstract class BulletSprite extends Sprite {
         drawRotated(angle , x - GameState.sX , y - GameState.sY , g);
     }
 
+    /**
+     * Find out whether or not the bullet collides with a block or another moving sprite
+     * @param r Bullet's sprite
+     * @return true or false
+     */
     public boolean isCollidingWithSprite(Rectangle r){
         for(MovingSprite ms : GameState.enemies.getMovingSprites()){
             if(!collided && source == -1 && r.intersects(ms)){
@@ -77,6 +93,7 @@ public abstract class BulletSprite extends Sprite {
     }
 
 
+/* *********Getter and Setters********* */
 
     public boolean isCollided() {
         return collided;
@@ -110,5 +127,13 @@ public abstract class BulletSprite extends Sprite {
         this.damage = damage;
     }
 
+    public int getBulletSpeed() {
+        return bulletSpeed;
+    }
+
+    public void setBulletSpeed(int bulletSpeed) {
+        this.bulletSpeed = bulletSpeed;
+    }
+    /* *********Getter and Setters********* */
 
 }

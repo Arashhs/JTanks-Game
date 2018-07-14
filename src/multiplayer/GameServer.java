@@ -1,6 +1,7 @@
 package multiplayer;
 
 import bufferstrategy.GameLoop;
+import bufferstrategy.GameState;
 import bufferstrategy.Main;
 import gameMap.Level;
 import gameMap.Tank;
@@ -12,6 +13,12 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * This class is the server for the game
+ * It sends and recieves data to and from player
+ * Syncs data between two players
+ * @author Arash
+ */
 public class GameServer implements Runnable{
 
     private ServerSocket serverSocket;
@@ -53,6 +60,9 @@ public class GameServer implements Runnable{
         }
     }
 
+    /**
+     * Opens a connection socket between client and server
+     */
     public void connect(){
         try {
             serverSocket = new ServerSocket(50000);
@@ -68,20 +78,34 @@ public class GameServer implements Runnable{
                 networkInputStream = new ObjectInputStream(connection.getInputStream());
                 connected = true;
                 System.out.println("Connected");
+                GameState.setServerPause(false);
             } catch (IOException e) {
                 e.printStackTrace();
             }
     }
 
+    /**
+     * Syncs data between two players
+     * Sends server's gamestate to the client
+     */
     public void tick(){
         if (connected){
             Tank ta;
             try {
-                networkOutputStream.writeObject(GameLoop.getState().getTank());
+                networkOutputStream.writeObject(GameLoop.getState());
                 networkOutputStream.reset();
                 ta = (Tank) networkInputStream.readObject();
                 initOtherTank(ta);
             } catch (IOException e) {
+                try {
+                    connection.close();
+                    serverSocket.close();
+                    GameState.lastEvent = "Other player left the game, waiting for reconnect...";
+                    GameState.setServerPause(true);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                connect();
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -89,6 +113,7 @@ public class GameServer implements Runnable{
         }
     }
 
+    /* ***********Getter and Setters************* */
     public ServerSocket getServerSocket() {
         return serverSocket;
     }
@@ -120,11 +145,15 @@ public class GameServer implements Runnable{
     public void setConnected(boolean connected) {
         this.connected = connected;
     }
+    /* ***********Getter and Setters************* */
 
+    /**
+     * updates the other player's tank (= Client player's tank) in the server
+     * @param ta otherPlayer's tank
+     */
     public void initOtherTank(Tank ta){
         try {
             otherTank.setBulletSprites(ta.getBulletSprites());
-            otherTank.setHp(ta.getHp());
             otherTank.setOtherAngle(ta.getTurretAngle());
             otherTank.locX = ta.locX;
             otherTank.locY = ta.locY;
@@ -132,6 +161,7 @@ public class GameServer implements Runnable{
             otherTank.setGunState(ta.getGunState());
             otherTank.setMachinGunUpgraded(ta.isMachinGunUpgraded());
             otherTank.setCannonUpgraded(ta.isCannonUpgraded());
+            otherTank.setHp(ta.getHp());
         }
         catch (NullPointerException e){
             try {

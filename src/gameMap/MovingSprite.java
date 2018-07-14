@@ -9,6 +9,10 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+/**
+ * MovingSprite that is the father of all moving sprites (Player - enemies) + Mine (Exception!)
+ * @author Arash
+ */
 public abstract class MovingSprite extends Sprite {
     protected int hp, diam;
     protected double turretAngle;
@@ -34,19 +38,16 @@ public abstract class MovingSprite extends Sprite {
         deathLoot = null;
     }
 
+    /**
+     * Controls whether or not a moving sprite collides with another movingSprite
+     * @param rectangle movingSprite we want to check whether or not it collides with another one
+     * @return
+     */
     public boolean isColliding(Rectangle rectangle) {
         Rectangle tank = new Rectangle(GameState.tank.locX , GameState.tank.locY , GameState.tank.width , GameState.tank.height);
         Rectangle otherTank;
-        if(Main.connectionType == 0){
-            otherTank = new Rectangle(GameServer.otherTank.locX , GameServer.otherTank.locY , GameState.tank.width , GameState.tank.height);
-            if(otherTank.intersects(rectangle)){
-                collideWithTank = true;
-                collideWithOther = true;
-                return true;
-            }
-        }
-        else if(Main.connectionType == 1){
-            otherTank = new Rectangle(GameClient.otherTank.locX , GameClient.otherTank.locY , GameState.tank.width , GameState.tank.height);
+        if(Main.gameMode == 1){
+            otherTank = new Rectangle(Main.otherTank.locX , Main.otherTank.locY , GameState.tank.width , GameState.tank.height);
             if(otherTank.intersects(rectangle)){
                 collideWithTank = true;
                 collideWithOther = true;
@@ -71,6 +72,9 @@ public abstract class MovingSprite extends Sprite {
         return false;
     }
 
+    /**
+     * Updates the location of movingSprite
+     */
     public void tick() {
         if(Main.gameMode == 0) {
             if (Math.abs(x - GameState.tank.locX) < 800 && Math.abs(y - GameState.tank.locY) < 800) {
@@ -98,6 +102,11 @@ public abstract class MovingSprite extends Sprite {
         }
     }
 
+    /**
+     * Renders and shows the movingSprite
+     * @param g2d Graphic's object
+     * @param state Current game state
+     */
     public void render(Graphics2D g2d, GameState state) {
 
         if (Main.gameMode == 0) {
@@ -119,6 +128,13 @@ public abstract class MovingSprite extends Sprite {
         }
     }
 
+    /**
+     * Draws the rotated turret for moving sprite (Used only for enemies)
+     * @param angle angle of the turret
+     * @param x x Coordinate of the place we want to draw
+     * @param y y Coordinate of the place we want to draw
+     * @param g Graphic's object
+     */
     public void drawRotated(double angle , int x , int y , Graphics2D g){
         backupAt = g.getTransform();
         at = new AffineTransform();
@@ -128,6 +144,10 @@ public abstract class MovingSprite extends Sprite {
         g.setTransform(backupAt);
     }
 
+    /**
+     * Simulates the bullet hitting player
+     * @param bullet bullet that hit player
+     */
     public void bulletHit(BulletSprite bullet){
         hp -= bullet.damage;
         if(hp <= 0)
@@ -135,6 +155,10 @@ public abstract class MovingSprite extends Sprite {
 
     }
 
+    /**
+     * Updates the sprite based on its state (Dead or alive)
+     * removes the dead enemies from screen
+     */
     public void update(){
         if (state == STATE_Dead) {
             GameState.lastEvent = "Enemy destroyed!";
@@ -143,6 +167,7 @@ public abstract class MovingSprite extends Sprite {
         }
     }
 
+    /* *******Getter and Setters******** */
     public int getHp() {
         return hp;
     }
@@ -154,7 +179,17 @@ public abstract class MovingSprite extends Sprite {
     public double getTurretAngle() {
         return turretAngle;
     }
+    /* *******Getter and Setters******** */
 
+
+    /**
+     * Calculates the distance between two coordinates
+     * @param x1 x of first point
+     * @param y1 y of first point
+     * @param x2 x of the second point
+     * @param y2 y of the second point
+     * @return dinstance in integer
+     */
     public int distanceInteger(int x1 , int y1 , int x2 , int y2){
         return  (int) Math.hypot(x1-x2, y1-y2);
     }

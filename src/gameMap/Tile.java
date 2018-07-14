@@ -10,6 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * This class is the vital class for the game
+ * All pictures are stored here
+ * ALL classes need this class for rendering
+ * @author Arash
+ */
 public class Tile {
     public static final int tileSize = 64;
 
@@ -77,6 +83,9 @@ public class Tile {
         }
     }
 
+    /**
+     * Load tile images based on their id
+     */
     public void loadTileImages() {
         // keep looking for tile A,B,C, etc. this makes it
         // easy to drop new tiles in the images/ directory
@@ -93,6 +102,11 @@ public class Tile {
         }
     }
 
+    /**
+     * Load a single image
+     * @param name name of the picture in folder
+     * @return image for the requested file
+     */
     public BufferedImage loadImage(String name) {
         BufferedImage image = null;
         String fileName = "res\\assets\\" + name;

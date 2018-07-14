@@ -11,6 +11,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Start menu for the game
+ * All data related to connectionType and networkType is initialized here
+ * @author Arash Hajisafi
+ */
 public class StartMenu extends JFrame implements ActionListener, Runnable {
     private static final long serialVersionUID = 1L;
 
@@ -55,6 +60,9 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
 
     }
 
+    /**
+     * Add buttons
+     */
     private void addButtons() {
 
         singleplayer.addActionListener(this);
@@ -114,6 +122,10 @@ public class StartMenu extends JFrame implements ActionListener, Runnable {
 
     }
 
+    /**
+     * Add listeners
+     * @param event event parameter
+     */
     public void actionPerformed(ActionEvent event) {
 
         Object source = event.getSource();

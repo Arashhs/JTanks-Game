@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * A moving-type enemy
+ * Suicide machine!!
+ * @author Arash
+ */
 public class MovingEnemy2 extends MovingSprite {
     private static final int MOVING_ENEMY_DAMAGE = 100;
     private double speed;
@@ -29,6 +34,10 @@ public class MovingEnemy2 extends MovingSprite {
         speed = 7;
     }
 
+    /**
+     * Updates the state of the enemy
+     * goes toward nearest player and commits suicide and damages player!
+     */
     public void tick() {
         if (Main.gameMode == 0) {
             if (collideWithTank) {
@@ -88,15 +97,31 @@ public class MovingEnemy2 extends MovingSprite {
         }
     }
 
+    /**
+     * Renders and shows the enemy
+     * @param g2d
+     * @param state
+     */
     public void render(Graphics2D g2d, GameState state) {
         g2d.drawImage(image, x - state.sX, y - state.sY, null);
     }
 
+    /**
+     * Customized serialization
+     * @param out outputStream
+     * @throws IOException
+     */
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
 
     }
 
+    /**
+     * Customized serialization
+     * @param in inputStream
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         baseImage = Tile.movingEnemy2_1;
