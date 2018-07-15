@@ -1,0 +1,28 @@
+# Medium Map file for tile-based game
+# (Lines that start with '#' are comments)
+# The tiles are:
+# (Space) Dirt tile
+# A..Z Tiles A through Z
+# o Tank enemy moving horizontal
+# ! Tank enemy moving Vertical
+# 1 Suicidal machine unit!
+# # Mine
+# $ Big red missile launcher
+# % Big blue missile launcher
+# ^ Weapon Upgrader
+# & Repair Kit
+# * Cannon ammo
+# ( MachinGun ammo
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+BMMMMMMCC            !     ! CCMMMMBMMMMMCC     ! D ^ D *  !          !       !      B     J          D ^ D   !         (        CCMMMMMMMB
+BMMMMMMCC                    CCMMMMBMMMMMCC       DDDDD                             B    % J     *    DDDDD                     CCMMMMCMMMB
+BCCCCCCCC                    CCCCCCBCCCCCCC                                        BJJJJJJJJO           1                      CCCCCCBCCCCB
+B             JJJJJJJJJJ           B            O                                 B ! B                                                   B
+B    O        J        J          1D1                                          1 D     D                1                                 B
+B             J    $   J          1D1     &*                                  1 D       D   &                       JJJJJJJJJJJJJ         B
+B    O        J        J          1D1           O                              1 D     D                            J %         J         B
+B             JJJJJJJJJJ           B                      (CCDCC                  B   D                 1           J         $ J         B
+BJJJJJJJJJ                         BJJJJJJJJJ             CDDCDDC                  B D      O    (                  JJJJJJJJJJJJJ         B
+B    %   J         DDDDD           B    %   J             DMMMMMD                   BCBCBCBCBCBCC       1                                 B
+B        J         D ^ D           B        J             DMMMMMD                    BCCBCCCBCCCB                                         B
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB

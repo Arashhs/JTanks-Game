@@ -1,4 +1,4 @@
-# Medium Map file for tile-based game
+# Map Editor file for tile-based JTanks by Arash Hajisafi!
 # (Lines that start with '#' are comments)
 # The tiles are:
 # (Space) Dirt tile
@@ -14,11 +14,11 @@
 # * Cannon ammo
 # ( MachinGun ammo
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-B                          BBB   !       !                    1          JJ       JJ      BBBB         JJJJJJ
-B                          BBB                                           JJ   $   JJ   $  BBBB    (    JJJJJJ
+B                          BBB   !                            1          JJ       JJ      BBBB         JJJJJJ
+B                          BBB                                           JJ   $   JJ      BBBB     (   JJJJJJ
 B    CCCCCCCCCCC           BBB               BBBBBBBBBBBBBBB             JJ       JJ      BBBB         JJJJJJ
 B    C         C           BBB               BB  ^  BBBBBBBBB            JJ       JJ      BBBBJDDDDDDDJJJJJJJJJJJJJJ
-B    C         C           BBB      &       BBBDDDDDBBBBBBBBBBBBBBBB     JJJJJJJJJJJJJJJJJBBB 1          1 JJJJJJ
+B    C         C           BBB      &       BBBDDDDDBBBBBBBBBBBBBBBB     JJJJJJJJJJJJJJJJJBBB            1 JJJJJJ
 B    C         CCCCCCCC    BBB             BB                DD   BB                     BBBB      !       JJJJJJ
 B    C               CC    BBBJJJJJJJJ # # BB                DD * BB                     BBBB              JJJJJJ
 B    C                BDDDBBBB                  CCCCCCCCCC   DD   BB                     BBBB              JJJJJJ
@@ -26,17 +26,17 @@ B    C                B   BBBB (                CMMMMMMMMC   BBBBBBB            
 B    C                B ^ BBBB                  CMMMMMMMMC       BBB                                       JJJJJJ                         B
 B    CCCCCCC # # CCCCCCBBBBBBBBJJJJJJJJJJJ      CCCCCCCCCC       BBB    *                                  JJJJJJ                         B
 B     J                 BBB      1      JJ      C   *   C        BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB # # # # #  JJJJJJJJJJJJ                   B
-B     J               O BBB              J       C  !  C       BBBBBBCCCCCCCCC   &                         JJ     BBBBB       $      $    B
+B     J                 BBB              J       C  !  C       BBBBBBCCCCCCCCC   &                         JJ     BBBBB       $      $    B
 B     J                 BBB              J                    BBBBBBBCCMMMMCCC                   !         JJ  %  BBBBB                  BB
 B     J                 BBB                                   BBBBBBBBBCCMMC                               JJ     BBBBB                  BB
 B                      BBBJJJJJJ    JJJ         CCCCCCCC      BBBBBBBBBBCCCC            BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB      BBBBBBB
 B O                    BBB            J                       BBBBBBBBBBBBB  O          JJJJ         JJ                    !             BB
-B                !     BBB            JBBBBBBBBB              BBBBBBBBBBBBB             JJJJ    %    JJ                                  BB
+B                      BBB            JBBBBBBBBB              BBBBBBBBBBBBB             JJJJ    %    JJ                                  BB
 B                      BBB            J                   BBBBBBBBBBBBCJJJJ             JJJJJJJJJJJJJJJCCCCCCCCCCCC                      BB
 B                      BBB            J                   BBB   ^   BBCJJJJ                             CCMMMMMMMCCC                     BB
-B                      BBB            J                   BBB       BBCJJJJ  O             !            CCCCCCCCCCCC                     BB
+B                      BBB            J                   BBB       BBCJJJJ                !            CCCCCCCCCCCC                     BB
 B                      BBBBB      BBBBBBBBBBBBBBBBBBBBBBBBBBBDDDDDDDBB                               (  CC         CC                    BB
 B        !              D         JJJJJJJJ            CCCCCCCC     1                                                                     BB
 B                       D         JJJJJJJJ            CCMMMMCC                                                                           BB
-B                       D         JJJJJJJJ            CCMMMMCC     1                                                                     BBB
+B                       D         JJJJJJJJ            CCMMMMCC                                                                           BBB
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB

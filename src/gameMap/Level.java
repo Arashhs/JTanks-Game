@@ -34,12 +34,25 @@ public class Level implements Serializable {
     blocks[0][0].setCollidable(true);
     blocks[5][5].setCollidable(true); */
         try {
-            if(Main.gameDifficulty == 1)
-                  blocks = loadMap("res\\maps\\map1_easy.txt");
-            else if(Main.gameDifficulty == 2)
-                blocks = loadMap("res\\maps\\map1_medium.txt");
-            else if(Main.gameDifficulty == 3)
-                blocks = loadMap("res\\maps\\map1_hard.txt");
+            if(Main.levelSelection == 0){
+                blocks = loadMap("res\\maps\\map_edited.txt");
+            }
+            else if(Main.levelSelection == 1) {
+                if (Main.gameDifficulty == 1)
+                    blocks = loadMap("res\\maps\\map1_easy.txt");
+                else if (Main.gameDifficulty == 2)
+                    blocks = loadMap("res\\maps\\map1_medium.txt");
+                else if (Main.gameDifficulty == 3)
+                    blocks = loadMap("res\\maps\\map1_hard.txt");
+            }
+            else if(Main.levelSelection == 2){
+                if (Main.gameDifficulty == 1)
+                    blocks = loadMap("res\\maps\\map2_easy.txt");
+                else if (Main.gameDifficulty == 2)
+                    blocks = loadMap("res\\maps\\map2_medium.txt");
+                else if (Main.gameDifficulty == 3)
+                    blocks = loadMap("res\\maps\\map2_hard.txt");
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,7 +79,7 @@ public class Level implements Serializable {
     public void render(Graphics2D g , GameState state){
         for (int i = Math.max ((state.tank.locX / Tile.tileSize - 9) , 0 )  ; i < Math.min( (state.tank.locX / Tile.tileSize) + 13 , blocks.length)  ; i++) {
            for (int j = Math.max ((state.tank.locY / Tile.tileSize - 6) , 0 )  ; j < Math.min( (state.tank.locY / Tile.tileSize) + 13 , blocks[i].length)  ; j++){
-                  blocks[i][j].render(g);
+               blocks[i][j].render(g);
             }
         }
     }

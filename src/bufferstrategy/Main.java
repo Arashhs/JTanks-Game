@@ -18,6 +18,7 @@ public class Main {
 	public static int gameMode; //0: Single Player | 1: Multiplayer
 	public static int gameDifficulty = 0; //1: Easy | 2: Medium | 3: Hard
 	public static int connectionType = -1; //0: Host | 1: Client | -1: Single Player
+	public static int levelSelection = 1; //1: level 1 | 2: level 2 | 0: edited level
 	public static GameServer gameServer;
 	public static GameClient gameClient;
 
@@ -61,6 +62,7 @@ public class Main {
 				System.out.println("Difficulty: " + gameDifficulty);
 				System.out.println("Mode: " + gameMode);
 				System.out.println("Connection type: " + connectionType);
+				System.out.println("Level: " + levelSelection);
 			//	new Tile(); //load Images
 				GameFrame frame = new GameFrame("JTanks");
 				frame.setLocationRelativeTo(null); // put frame at center of screen
