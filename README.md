@@ -5,8 +5,6 @@ at the end of my freshman year at university.
 - A balanced loot-based system is implemented with various power-up items - varying from weapon-upgrades to reducing damage taken by the player
 - Featuring three different difficulty settings (Easy, Normal, and Hard) which impacts the maps, enemies, and the amount of damage taken by the player in the game
 - The project is based on Buffer-Strategy implementation and uses multi-threading techniques
-<br/>
+Here's some gameplay footage: <br/><br/>
 
-
-Here's some gameplay footage: <br/>
 ![JTanks Gameplay © Arash Hajisafi](gameplay.gif)
