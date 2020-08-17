@@ -1,5 +1,7 @@
 # JTanks-Game
-<![JTanks Gameplay © Arash Hajisafi](gameplay.gif)
+<div style="vertical-align:middle;">
+  ![JTanks Gameplay © Arash Hajisafi](gameplay.gif)
+</div>
 <br/>
 JTanks is a 2D tank game made in java for the final project of my Advanced Programming course written
 at the end of my freshman year at university.
