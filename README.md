@@ -1,5 +1,5 @@
 # JTanks-Game
-<p align="center">
+<p align="left">
   <img src="gameplay.gif">
 </p>
 
